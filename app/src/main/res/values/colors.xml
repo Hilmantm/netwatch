@@ -10,4 +10,7 @@
 
     <color name="primary_color">#212121</color>
     <color name="accent_color">#FF0000</color>
+    <color name="edt_search_color">#424242</color>
+    <color name="edt_search_drawable_color">#B3B3B3</color>
+    <color name="banner_view_dots_color">#4D4D4D</color>
 </resources>
