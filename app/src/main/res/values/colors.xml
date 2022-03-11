@@ -13,4 +13,5 @@
     <color name="edt_search_color">#424242</color>
     <color name="edt_search_drawable_color">#B3B3B3</color>
     <color name="banner_view_dots_color">#4D4D4D</color>
+    <color name="ic_see_more_color">#A6A6A6</color>
 </resources>
