@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary_color"
     tools:context=".ui.main.FavoriteFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/favorite_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/root_padding"
+        android:layout_marginStart="@dimen/root_padding"
+        android:text="@string/favorite"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_marginEnd="@dimen/root_padding"
+        android:layout_marginTop="@dimen/section_margin"
+        android:layout_marginBottom="@dimen/root_padding"
+        app:layout_constraintLeft_toLeftOf="@id/favorite_title"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favorite_title"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <include
+            android:id="@+id/testing1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/section_margin"
+            layout="@layout/component_movie_show_list" />
+
+        <include
+            android:id="@+id/testing2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/section_margin"
+            layout="@layout/component_movie_show_list" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
