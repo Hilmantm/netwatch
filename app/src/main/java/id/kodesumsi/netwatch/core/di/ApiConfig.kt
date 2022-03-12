@@ -1,0 +1,91 @@
+package id.kodesumsi.netwatch.core.di
+
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
+import id.kodesumsi.netwatch.BuildConfig
+import id.kodesumsi.netwatch.core.data.source.network.NetworkService
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
+
+@InstallIn(SingletonComponent::class)
+@Module
+object ApiConfig {
+
+    @Provides
+    @Singleton
+    fun providesBaseUrl(): String {
+        return BuildConfig.BASE_URL
+    }
+
+    @Provides
+    @Singleton
+    fun providesChuckerInterceptor(
+        @ApplicationContext ctx: Context,
+        collector: ChuckerCollector
+    ): ChuckerInterceptor {
+        return ChuckerInterceptor(
+            context = ctx,
+            collector = collector,
+            maxContentLength = 250000L,
+            alwaysReadResponseBody = true
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun providesHttpClient(
+        chuckerInterceptor: ChuckerInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .callTimeout(15, TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .addInterceptor(chuckerInterceptor)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesGsonConverterFactory(): GsonConverterFactory {
+        return GsonConverterFactory.create()
+    }
+
+    @Provides
+    @Singleton
+    fun providesRxJavaCallAdapterFactory(): RxJava3CallAdapterFactory {
+        return RxJava3CallAdapterFactory.create()
+    }
+
+    @Provides
+    @Singleton
+    fun providesNetworkService(
+        baseUrl: String,
+        rxJava3CallAdapterFactory: RxJava3CallAdapterFactory,
+        gsonConverterFactory: GsonConverterFactory,
+        okHttpClient: OkHttpClient
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addCallAdapterFactory(rxJava3CallAdapterFactory)
+            .addConverterFactory(gsonConverterFactory)
+            .client(okHttpClient)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesApiService(retrofit: Retrofit): NetworkService {
+        return retrofit.create(NetworkService::class.java)
+    }
+
+}
