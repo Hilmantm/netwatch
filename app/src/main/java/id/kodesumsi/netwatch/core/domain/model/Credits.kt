@@ -6,8 +6,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Credits(
-
-    @field:SerializedName("cast")
     val cast: List<Cast?>? = null,
-
 ) : Parcelable
