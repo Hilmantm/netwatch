@@ -7,4 +7,5 @@
     <string name="favorite">Favorite</string>
     <string name="profile">Profile</string>
     <string name="edt_search_hint">Search tv shows, movies, etc.</string>
+    <string name="search">Search</string>
 </resources>
