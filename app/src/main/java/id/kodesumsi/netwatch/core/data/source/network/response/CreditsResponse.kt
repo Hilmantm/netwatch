@@ -4,10 +4,9 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize
-data class Credits(
+data class CreditsResponse(
 
     @field:SerializedName("cast")
-    val cast: List<Cast?>? = null,
+    val cast: List<CastResponse>? = listOf(),
 
-) : Parcelable
+)

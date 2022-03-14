@@ -4,8 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize
-data class Cast(
+data class CastResponse(
 
 	@field:SerializedName("cast_id")
 	val castId: Int? = null,
@@ -42,7 +41,4 @@ data class Cast(
 
 	@field:SerializedName("order")
 	val order: Int? = null,
-
-	@field:SerializedName("cast")
-	val cast: List<Cast?>? = null
-) : Parcelable
+)
