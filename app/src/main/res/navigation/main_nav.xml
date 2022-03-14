@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/home_fragment"
-        android:name="id.kodesumsi.netwatch.ui.main.HomeFragment"
+        android:name="id.kodesumsi.netwatch.ui.main.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favorite_fragment"
-        android:name="id.kodesumsi.netwatch.ui.main.FavoriteFragment"
+        android:name="id.kodesumsi.netwatch.ui.main.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/profile_fragment"
-        android:name="id.kodesumsi.netwatch.ui.main.ProfileFragment"
+        android:name="id.kodesumsi.netwatch.ui.main.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

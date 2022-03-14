@@ -1,4 +1,4 @@
-package id.kodesumsi.netwatch.ui.main
+package id.kodesumsi.netwatch.ui.main.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
