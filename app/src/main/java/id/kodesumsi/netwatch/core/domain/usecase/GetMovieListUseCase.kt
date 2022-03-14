@@ -1,8 +1,11 @@
 package id.kodesumsi.netwatch.core.domain.usecase
 
+import id.kodesumsi.netwatch.core.data.source.Resource
+import id.kodesumsi.netwatch.core.domain.model.Movie
 import id.kodesumsi.netwatch.core.domain.repository.MovieRepository
+import io.reactivex.rxjava3.core.Flowable
 import javax.inject.Inject
 
 interface GetMovieListUseCase {
-    fun getMovieList(category: String)
+    fun getMovieList(category: String): Flowable<Resource<List<Movie>>>
 }
