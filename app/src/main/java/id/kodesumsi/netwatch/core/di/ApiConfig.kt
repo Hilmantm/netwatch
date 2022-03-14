@@ -10,9 +10,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import id.kodesumsi.netwatch.BuildConfig
-import id.kodesumsi.netwatch.core.data.source.network.API_KEY
-import id.kodesumsi.netwatch.core.data.source.network.BASE_URL
-import id.kodesumsi.netwatch.core.data.source.network.NetworkService
+import id.kodesumsi.netwatch.core.data.source.network.*
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -96,6 +94,12 @@ object ApiConfig {
     @Singleton
     fun providesApiService(retrofit: Retrofit): NetworkService {
         return retrofit.create(NetworkService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun providesRemoteDataSource(networkService: NetworkService): RemoteDataSource {
+        return RemoteDataSourceImpl(networkService)
     }
 
 }
