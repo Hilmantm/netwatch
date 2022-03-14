@@ -1,7 +1,7 @@
 package id.kodesumsi.netwatch.core.data.source.network
 
 import android.util.Log
-import id.kodesumsi.netwatch.core.data.source.network.response.Movie
+import id.kodesumsi.netwatch.core.data.source.network.response.MovieResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Flowable
@@ -10,15 +10,14 @@ import io.reactivex.rxjava3.subjects.PublishSubject
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(
-    private val networkService: NetworkService
+    private val networkService: NetworkService,
+    @API_KEY private val apiKey: String
 ): RemoteDataSource {
 
-    @API_KEY @Inject lateinit var apiKey: String
+    override fun getMovieList(category: String): Flowable<ApiResponse<List<MovieResponse>>> {
+        val resultData = PublishSubject.create<ApiResponse<List<MovieResponse>>>()
 
-    override fun getMovieList(category: String): Flowable<ApiResponse<List<Movie>>> {
-        val resultData = PublishSubject.create<ApiResponse<List<Movie>>>()
-
-        val client = networkService.getMovieList(apiKey, category)
+        val client = networkService.getMovieList(category = category, apiKey = apiKey)
 
         client.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
