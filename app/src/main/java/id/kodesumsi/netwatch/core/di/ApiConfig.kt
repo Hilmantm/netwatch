@@ -10,6 +10,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import id.kodesumsi.netwatch.BuildConfig
+import id.kodesumsi.netwatch.core.data.source.network.API_KEY
+import id.kodesumsi.netwatch.core.data.source.network.BASE_URL
 import id.kodesumsi.netwatch.core.data.source.network.NetworkService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -23,8 +25,16 @@ object ApiConfig {
 
     @Provides
     @Singleton
+    @BASE_URL
     fun providesBaseUrl(): String {
         return BuildConfig.BASE_URL
+    }
+
+    @Provides
+    @Singleton
+    @API_KEY
+    fun providesApiKey(): String {
+        return BuildConfig.API_KEY
     }
 
     @Provides
@@ -69,7 +79,7 @@ object ApiConfig {
     @Provides
     @Singleton
     fun providesNetworkService(
-        baseUrl: String,
+        @BASE_URL baseUrl: String,
         rxJava3CallAdapterFactory: RxJava3CallAdapterFactory,
         gsonConverterFactory: GsonConverterFactory,
         okHttpClient: OkHttpClient
