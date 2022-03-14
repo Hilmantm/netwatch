@@ -1,8 +1,8 @@
 package id.kodesumsi.netwatch.core.domain.model
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
 data class Cast(
@@ -17,6 +17,5 @@ data class Cast(
 	val profilePath: String? = null,
 	val id: Int? = null,
 	val adult: Boolean? = null,
-	val order: Int? = null,
-	val cast: List<Cast?>? = null
+	val order: Int? = null
 ) : Parcelable
