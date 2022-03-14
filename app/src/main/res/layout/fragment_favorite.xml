@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primary_color"
-    tools:context=".ui.main.FavoriteFragment">
+    tools:context=".ui.main.favorite.FavoriteFragment">
 
     <TextView
         android:id="@+id/favorite_title"
