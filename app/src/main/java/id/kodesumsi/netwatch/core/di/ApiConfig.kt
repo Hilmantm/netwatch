@@ -1,8 +1,10 @@
 package id.kodesumsi.netwatch.core.di
 
 import android.content.Context
+import android.util.Log
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.chuckerteam.chucker.api.RetentionManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,22 +19,34 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
 @Module
+@InstallIn(SingletonComponent::class)
 object ApiConfig {
 
+    @BASE_URL
     @Provides
     @Singleton
-    @BASE_URL
     fun providesBaseUrl(): String {
         return BuildConfig.BASE_URL
     }
 
+    @API_KEY
     @Provides
     @Singleton
-    @API_KEY
     fun providesApiKey(): String {
         return BuildConfig.API_KEY
+    }
+
+    @Provides
+    @Singleton
+    fun providesChuckerCollector(
+        @ApplicationContext ctx: Context
+    ): ChuckerCollector {
+        return ChuckerCollector(
+            context = ctx,
+            showNotification = true,
+            retentionPeriod = RetentionManager.Period.ONE_DAY
+        )
     }
 
     @Provides
@@ -98,8 +112,12 @@ object ApiConfig {
 
     @Provides
     @Singleton
-    fun providesRemoteDataSource(networkService: NetworkService): RemoteDataSource {
-        return RemoteDataSourceImpl(networkService)
+    fun providesRemoteDataSource(
+        networkService: NetworkService,
+        @API_KEY apiKey: String,
+        @BASE_URL baseUrl: String
+    ): RemoteDataSource {
+        return RemoteDataSourceImpl(networkService, apiKey, baseUrl)
     }
 
 }
