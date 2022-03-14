@@ -1,7 +1,8 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.secrets_gradle_plugin' version '0.5'
@@ -17,7 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "BASE_URL", '"https://https://api.themoviedb.org/3/"'
+        buildConfigField "String", "BASE_URL", '"https://api.themoviedb.org/3/"'
         buildConfigField "String", "API_KEY", '"f76368dd8174f33f2ea3d5f032f831c0"'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -38,6 +39,9 @@ android {
     }
     viewBinding {
         enabled = true
+    }
+    kapt {
+        correctErrorTypes true
     }
 }
 
@@ -101,6 +105,8 @@ dependencies {
 
     // Dots Indicator
     implementation 'com.tbuonomo:dotsindicator:4.2'
+
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.4.1"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
