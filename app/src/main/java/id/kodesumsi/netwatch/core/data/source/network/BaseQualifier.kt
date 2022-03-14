@@ -2,6 +2,12 @@ package id.kodesumsi.netwatch.core.data.source.network
 
 import javax.inject.Qualifier
 
+/**
+ * Class ini digunakan untuk menklasifikasikan provides tipe data yang sama
+ * pada hilt
+ *
+ * */
+
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class BASE_URL
