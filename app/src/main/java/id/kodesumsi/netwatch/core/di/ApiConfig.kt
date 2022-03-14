@@ -114,10 +114,9 @@ object ApiConfig {
     @Singleton
     fun providesRemoteDataSource(
         networkService: NetworkService,
-        @API_KEY apiKey: String,
-        @BASE_URL baseUrl: String
+        @API_KEY apiKey: String
     ): RemoteDataSource {
-        return RemoteDataSourceImpl(networkService, apiKey, baseUrl)
+        return RemoteDataSourceImpl(networkService, apiKey)
     }
 
 }
