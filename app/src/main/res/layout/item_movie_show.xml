@@ -15,8 +15,7 @@
             android:id="@+id/item_thumb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@color/accent_color"
-            android:background="@drawable/bg_five_radius"/>
+            android:src="@color/accent_color"/>
 
     </androidx.cardview.widget.CardView>
 
