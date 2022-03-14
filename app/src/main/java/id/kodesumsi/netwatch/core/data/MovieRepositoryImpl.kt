@@ -3,14 +3,12 @@ package id.kodesumsi.netwatch.core.data
 import id.kodesumsi.netwatch.core.data.source.Resource
 import id.kodesumsi.netwatch.core.data.source.network.ApiResponse
 import id.kodesumsi.netwatch.core.data.source.network.RemoteDataSource
-import id.kodesumsi.netwatch.core.data.source.network.RemoteDataSourceImpl
 import id.kodesumsi.netwatch.core.domain.model.Movie
 import id.kodesumsi.netwatch.core.domain.repository.MovieRepository
 import id.kodesumsi.netwatch.core.utils.DataMapper
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Flowable
-import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
 import javax.inject.Inject

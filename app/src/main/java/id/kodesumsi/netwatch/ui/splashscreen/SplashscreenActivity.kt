@@ -2,9 +2,9 @@ package id.kodesumsi.netwatch.ui.splashscreen
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import id.kodesumsi.netwatch.R
 import id.kodesumsi.netwatch.core.utils.Constant.Companion.SPLASHSCREEN_DELAY
 import id.kodesumsi.netwatch.ui.main.MainActivity
