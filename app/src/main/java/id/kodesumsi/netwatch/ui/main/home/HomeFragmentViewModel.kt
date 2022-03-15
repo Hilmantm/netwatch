@@ -7,12 +7,12 @@ import id.kodesumsi.netwatch.core.data.source.DataSourceConstant.Companion.NOW_P
 import id.kodesumsi.netwatch.core.data.source.DataSourceConstant.Companion.POPULAR
 import id.kodesumsi.netwatch.core.data.source.DataSourceConstant.Companion.TOP_RATED
 import id.kodesumsi.netwatch.core.data.source.DataSourceConstant.Companion.UPCOMING
-import id.kodesumsi.netwatch.core.domain.usecase.GetMovieListUseCase
+import id.kodesumsi.netwatch.core.domain.usecase.MovieListUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeFragmentViewModel @Inject constructor(
-    private val moviewUseCase: GetMovieListUseCase
+    private val moviewUseCase: MovieListUseCase
 ): ViewModel() {
 
     val nowPlayingMovies = LiveDataReactiveStreams.fromPublisher(moviewUseCase.getMovieList(NOW_PLAYING))

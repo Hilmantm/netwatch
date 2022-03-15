@@ -7,8 +7,8 @@ import dagger.hilt.components.SingletonComponent
 import id.kodesumsi.netwatch.core.data.MovieRepositoryImpl
 import id.kodesumsi.netwatch.core.data.source.network.RemoteDataSource
 import id.kodesumsi.netwatch.core.domain.repository.MovieRepository
-import id.kodesumsi.netwatch.core.domain.usecase.GetMovieListInteractor
-import id.kodesumsi.netwatch.core.domain.usecase.GetMovieListUseCase
+import id.kodesumsi.netwatch.core.domain.usecase.MovieListInteractor
+import id.kodesumsi.netwatch.core.domain.usecase.MovieListUseCase
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -27,8 +27,8 @@ object Injection {
     @Singleton
     fun provideGetMovieUseCase(
         movieRepository: MovieRepository
-    ): GetMovieListUseCase {
-        return GetMovieListInteractor(movieRepository)
+    ): MovieListUseCase {
+        return MovieListInteractor(movieRepository)
     }
 
 }

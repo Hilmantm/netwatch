@@ -6,9 +6,9 @@ import id.kodesumsi.netwatch.core.domain.repository.MovieRepository
 import io.reactivex.rxjava3.core.Flowable
 import javax.inject.Inject
 
-class GetMovieListInteractor @Inject constructor(
+class MovieListInteractor @Inject constructor(
     private val movieRepository: MovieRepository
-): GetMovieListUseCase {
+): MovieListUseCase {
     override fun getMovieList(category: String): Flowable<Resource<List<Movie>>> {
         return movieRepository.getMovieList(category)
     }
