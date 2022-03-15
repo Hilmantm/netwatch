@@ -1,6 +1,6 @@
-package id.kodesumsi.netwatch.core.data.source.network
+package id.kodesumsi.netwatch.core.data.source
 
-class NetworkConstant {
+class DataSourceConstant {
     companion object {
         const val POPULAR = "popular"
         const val LATEST = "latest"
