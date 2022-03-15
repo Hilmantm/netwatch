@@ -18,10 +18,10 @@ import id.kodesumsi.netwatch.base.BaseAdapter
 import id.kodesumsi.netwatch.base.BaseBottomSheet
 import id.kodesumsi.netwatch.base.BaseFragment
 import id.kodesumsi.netwatch.core.data.source.Resource
-import id.kodesumsi.netwatch.core.data.source.network.NetworkConstant.Companion.NOW_PLAYING
-import id.kodesumsi.netwatch.core.data.source.network.NetworkConstant.Companion.POPULAR
-import id.kodesumsi.netwatch.core.data.source.network.NetworkConstant.Companion.TOP_RATED
-import id.kodesumsi.netwatch.core.data.source.network.NetworkConstant.Companion.UPCOMING
+import id.kodesumsi.netwatch.core.data.source.DataSourceConstant.Companion.NOW_PLAYING
+import id.kodesumsi.netwatch.core.data.source.DataSourceConstant.Companion.POPULAR
+import id.kodesumsi.netwatch.core.data.source.DataSourceConstant.Companion.TOP_RATED
+import id.kodesumsi.netwatch.core.data.source.DataSourceConstant.Companion.UPCOMING
 import id.kodesumsi.netwatch.core.domain.model.Movie
 import id.kodesumsi.netwatch.databinding.ComponentBottomSheetOverviewBinding
 import id.kodesumsi.netwatch.databinding.ComponentMovieShowListBinding
