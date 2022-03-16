@@ -12,9 +12,12 @@ import id.kodesumsi.netwatch.core.utils.DataMapper
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
+import io.reactivex.rxjava3.subjects.SingleSubject
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
@@ -111,6 +114,10 @@ class MovieRepositoryImpl @Inject constructor(
             }
 
         return movies.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    override fun isFavorite(id: Int): Maybe<Movie> {
+        return localDataSouce.isFavorite(id).map { DataMapper.movieEntityToDomainMovie(it) }
     }
 
     override fun getAllFavoriteMovie(): Flowable<List<Movie>> {

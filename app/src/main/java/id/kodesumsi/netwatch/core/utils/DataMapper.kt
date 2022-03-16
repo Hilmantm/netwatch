@@ -21,6 +21,7 @@ object DataMapper {
                 releaseDate = it.releaseDate,
                 title = it.title,
                 voteAverage = it.voteAverage,
+                adult = it.adult
             )
         }
     }
@@ -36,7 +37,8 @@ object DataMapper {
             posterPath = data.posterPath,
             releaseDate = data.releaseDate,
             title = data.title,
-            voteAverage = data.voteAverage
+            voteAverage = data.voteAverage,
+            adult = data.adult
         )
     }
 
@@ -49,7 +51,7 @@ object DataMapper {
                 posterPath = it.posterPath,
                 backdropPath = it.backdropPath,
                 releaseDate =  it.releaseDate,
-                voteAverage = it.voteAverage
+                voteAverage = it.voteAverage,
             )
         }
     }

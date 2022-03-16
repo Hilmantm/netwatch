@@ -39,6 +39,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         fun getYear(releaseDate: String): String = releaseDate.split("-")[0]
 
-        fun getRating(adult: Boolean): String = if (!adult) { "13+" } else { "18+" }
+        fun getRating(adult: Boolean = false): String = if (!adult) { "13+" } else { "18+" }
     }
 }

@@ -33,7 +33,18 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             onBackPressed()
         }
 
+        viewModel.isFavorite(movieId)
+        viewModel.isFav.observe(this) {
+            Log.d("DETAIL ACTIVITY", "is fav : $it")
+            if(it.id != null) {
+                binding.btnOverviewFav.text = "Remove from fav"
+            } else {
+                binding.btnOverviewFav.text = "Favorite"
+            }
+        }
+
         viewModel.getDetailMovie(movieId).observe(this) { movie ->
+            Log.d("DETAIL ACTIVITY", "movie data: ${movie.data} ")
             if (movie != null) {
                 when (movie) {
                     is Resource.Success -> {
