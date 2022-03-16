@@ -15,9 +15,5 @@
         android:name="id.kodesumsi.netwatch.ui.main.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
-    <fragment
-        android:id="@+id/profile_fragment"
-        android:name="id.kodesumsi.netwatch.ui.main.profile.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+
 </navigation>
