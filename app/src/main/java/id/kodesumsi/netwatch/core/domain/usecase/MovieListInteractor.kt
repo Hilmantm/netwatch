@@ -7,9 +7,21 @@ import io.reactivex.rxjava3.core.Flowable
 import javax.inject.Inject
 
 class MovieListInteractor @Inject constructor(
-    private val movieRepository: MovieRepository
+    private val movieRepository: MovieRepository,
 ): MovieListUseCase {
     override fun getMovieList(category: String): Flowable<Resource<List<Movie>>> {
         return movieRepository.getMovieList(category)
     }
+
+//    override fun getAllFavoriteMovie(): Flowable<List<Movie>> {
+//        return movieRepository.getAllFavoriteMovie()
+//    }
+//
+//    override fun insertFavoriteMovie(movie: Movie) {
+//        movieRepository.insertFavoriteMovie(movie)
+//    }
+//
+//    override fun removeFavoriteMovie(movie: Movie) {
+//        movieRepository.remoteFavoriteMovie(movie)
+//    }
 }

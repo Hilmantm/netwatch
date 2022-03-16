@@ -7,5 +7,8 @@ class DataSourceConstant {
         const val NOW_PLAYING = "now_playing"
         const val TOP_RATED = "top_rated"
         const val UPCOMING = "upcoming"
+
+        const val MOVIES = "movies"
+        const val TV_SHOW = "tv_show"
     }
 }

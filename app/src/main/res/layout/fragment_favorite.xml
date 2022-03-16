@@ -19,10 +19,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
         android:layout_marginEnd="@dimen/root_padding"
         android:layout_marginTop="@dimen/section_margin"
         android:layout_marginBottom="@dimen/root_padding"
@@ -31,20 +30,14 @@
         app:layout_constraintTop_toBottomOf="@id/favorite_title"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <include
-            android:id="@+id/testing1"
+        <LinearLayout
+            android:id="@+id/favorite_movie_show_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/section_margin"
-            layout="@layout/component_movie_show_list" />
+            android:orientation="vertical">
 
-        <include
-            android:id="@+id/testing2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/section_margin"
-            layout="@layout/component_movie_show_list" />
+        </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

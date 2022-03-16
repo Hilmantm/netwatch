@@ -39,6 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeFragmentViewModel by viewModels()
     private val listOfMovies: MutableMap<String, ViewBinding> = mutableMapOf()
+    private val listOfMoviesAdapter: MutableMap<String, BaseAdapter<ItemMovieShowBinding, Movie>> = mutableMapOf()
 
     override fun setupViewBinding(): (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding = FragmentHomeBinding::inflate
 
@@ -54,30 +55,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner) { movies ->
             val view: ComponentMovieShowListBinding = listOfMovies[NOW_PLAYING] as ComponentMovieShowListBinding
-            setMoviesRosource(movies = movies, view = view)
+            setMoviesRosource(movies = movies, view = view, category = NOW_PLAYING)
         }
 
         viewModel.topRatedMovies.observe(viewLifecycleOwner) { movies ->
             val view: ComponentMovieShowListBinding = listOfMovies[TOP_RATED] as ComponentMovieShowListBinding
-            setMoviesRosource(movies = movies, view = view)
+            setMoviesRosource(movies = movies, view = view, category = TOP_RATED)
         }
 
         viewModel.popularMovies.observe(viewLifecycleOwner) { movies ->
             val view: ComponentMovieShowListBinding = listOfMovies[POPULAR] as ComponentMovieShowListBinding
-            setMoviesRosource(movies = movies, view = view)
+            setMoviesRosource(movies = movies, view = view, category = POPULAR)
         }
 
         viewModel.upcomingMovie.observe(viewLifecycleOwner) { movies ->
             val view: ComponentMovieShowListBinding = listOfMovies[UPCOMING] as ComponentMovieShowListBinding
-            setMoviesRosource(movies = movies, view = view)
+            setMoviesRosource(movies = movies, view = view, category = UPCOMING)
         }
     }
 
-    private fun setMoviesRosource(movies: Resource<List<Movie>>, view: ComponentMovieShowListBinding) {
+    private fun setMoviesRosource(
+        movies: Resource<List<Movie>>,
+        view: ComponentMovieShowListBinding,
+        category: String
+    ) {
         when(movies) {
             is Resource.Loading -> showLoading(view.pbMovieShow, view.rvMovieShow)
             is Resource.Success -> {
-                popularMoviesAdapter = BaseAdapter(movies.data!!, ItemMovieShowBinding::inflate) { item, itemRvBinding ->
+                listOfMoviesAdapter[category] = BaseAdapter(movies.data!!, ItemMovieShowBinding::inflate) { item, itemRvBinding ->
                     Glide.with(this).load(imageResource(item.posterPath.toString())).into(itemRvBinding.itemThumb)
                     itemRvBinding.root.setOnClickListener {
                         val overviewBottomSheet = BaseBottomSheet(ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
@@ -90,7 +95,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                             }
 
                             bottomSheetBinding.btnOverviewFav.setOnClickListener {
-                                Toast.makeText(requireContext(), "Favorite", Toast.LENGTH_SHORT).show()
+                                // viewModel.insertFavoriteMovie(item)
+                                Toast.makeText(requireContext(), "Fav", Toast.LENGTH_SHORT).show()
                             }
 
                             bottomSheetBinding.btnOverviewClose.setOnClickListener {
@@ -101,7 +107,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     }
                 }
                 view.rvMovieShow.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                view.rvMovieShow.adapter = popularMoviesAdapter
+                view.rvMovieShow.adapter = listOfMoviesAdapter[category]
                 showRvContent(view.pbMovieShow, view.rvMovieShow)
             }
         }

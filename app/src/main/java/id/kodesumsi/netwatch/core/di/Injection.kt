@@ -5,10 +5,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import id.kodesumsi.netwatch.core.data.MovieRepositoryImpl
+import id.kodesumsi.netwatch.core.data.source.local.LocalDataSource
 import id.kodesumsi.netwatch.core.data.source.network.RemoteDataSource
 import id.kodesumsi.netwatch.core.domain.repository.MovieRepository
 import id.kodesumsi.netwatch.core.domain.usecase.MovieListInteractor
 import id.kodesumsi.netwatch.core.domain.usecase.MovieListUseCase
+import id.kodesumsi.netwatch.core.utils.AppExecutors
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -16,11 +18,12 @@ import javax.inject.Singleton
 object Injection {
 
     @Provides
-    @Singleton
     fun provideMovieRepository(
-        remoteDataSource: RemoteDataSource
+        remoteDataSource: RemoteDataSource,
+        localDataSource: LocalDataSource
     ): MovieRepository {
-        return MovieRepositoryImpl(remoteDataSource)
+        val appExecutors = AppExecutors()
+        return MovieRepositoryImpl.getInstance(remoteDataSource, localDataSource, appExecutors)
     }
 
     @Provides

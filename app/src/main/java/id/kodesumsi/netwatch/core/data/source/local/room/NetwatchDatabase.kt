@@ -20,12 +20,10 @@ abstract class NetwatchDatabase: RoomDatabase() {
         fun getInstance(context: Context): NetwatchDatabase =
             INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext,
+                    context,
                     NetwatchDatabase::class.java,
                     DATABASE_NAME
-                )
-                    .fallbackToDestructiveMigration()
-                    .build()
+                ).build()
                 INSTANCE = instance
                 instance
             }

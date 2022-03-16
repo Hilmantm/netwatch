@@ -1,5 +1,7 @@
 package id.kodesumsi.netwatch.core.utils
 
+import androidx.room.ColumnInfo
+import id.kodesumsi.netwatch.core.data.source.local.entity.MovieEntity
 import id.kodesumsi.netwatch.core.data.source.network.response.CastResponse
 import id.kodesumsi.netwatch.core.data.source.network.response.CreditsResponse
 import id.kodesumsi.netwatch.core.data.source.network.response.MovieResponse
@@ -61,6 +63,58 @@ object DataMapper {
             title = data.title,
             voteAverage = data.voteAverage,
             credits = creditResponseToDomainCredit(data.credits!!)
+        )
+    }
+
+    fun mapMovieEntityToDomainMovie(data: List<MovieEntity>): List<Movie> {
+        return data.map {
+            Movie(
+                id = it.id,
+                overview = it.overview,
+                title = it.title,
+                posterPath = it.posterPath,
+                backdropPath = it.backdropPath,
+                releaseDate =  it.releaseDate,
+                voteAverage = it.voteAverage
+            )
+        }
+    }
+
+    fun mapMovieDomainToMovieEntity(data: List<Movie>): List<MovieEntity> {
+        return data.map {
+            MovieEntity(
+                id = it.id!!,
+                overview = it.overview,
+                title = it.title,
+                posterPath = it.posterPath,
+                backdropPath = it.backdropPath,
+                releaseDate =  it.releaseDate,
+                voteAverage = it.voteAverage
+            )
+        }
+    }
+
+    fun movieEntityToDomainMovie(data: MovieEntity): Movie {
+        return Movie(
+            id = data.id,
+            overview = data.overview,
+            title = data.title,
+            posterPath = data.posterPath,
+            backdropPath = data.backdropPath,
+            releaseDate =  data.releaseDate,
+            voteAverage = data.voteAverage
+        )
+    }
+
+    fun movieDomainToMovieEntity(data: Movie): MovieEntity {
+        return MovieEntity(
+            id = data.id!!,
+            overview = data.overview,
+            title = data.title,
+            posterPath = data.posterPath,
+            backdropPath = data.backdropPath,
+            releaseDate =  data.releaseDate,
+            voteAverage = data.voteAverage
         )
     }
 

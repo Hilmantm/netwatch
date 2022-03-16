@@ -6,4 +6,7 @@ import io.reactivex.rxjava3.core.Flowable
 
 interface MovieListUseCase {
     fun getMovieList(category: String): Flowable<Resource<List<Movie>>>
+//    fun getAllFavoriteMovie(): Flowable<List<Movie>>
+//    fun insertFavoriteMovie(movie: Movie)
+//    fun removeFavoriteMovie(movie: Movie)
 }

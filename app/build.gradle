@@ -14,9 +14,10 @@ android {
     defaultConfig {
         applicationId "id.kodesumsi.netwatch"
         minSdk 24
-        targetSdk 32
+        targetSdk 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         buildConfigField "String", "BASE_URL", '"https://api.themoviedb.org/3/"'
         buildConfigField "String", "API_KEY", '"f76368dd8174f33f2ea3d5f032f831c0"'
