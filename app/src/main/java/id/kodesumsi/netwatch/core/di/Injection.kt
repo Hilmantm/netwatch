@@ -22,8 +22,7 @@ object Injection {
         remoteDataSource: RemoteDataSource,
         localDataSource: LocalDataSource
     ): MovieRepository {
-        val appExecutors = AppExecutors()
-        return MovieRepositoryImpl.getInstance(remoteDataSource, localDataSource, appExecutors)
+        return MovieRepositoryImpl.getInstance(remoteDataSource, localDataSource)
     }
 
     @Provides

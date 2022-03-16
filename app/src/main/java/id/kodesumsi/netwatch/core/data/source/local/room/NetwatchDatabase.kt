@@ -17,6 +17,7 @@ abstract class NetwatchDatabase: RoomDatabase() {
         @Volatile
         private var INSTANCE: NetwatchDatabase? = null
 
+        @JvmStatic
         fun getInstance(context: Context): NetwatchDatabase =
             INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(

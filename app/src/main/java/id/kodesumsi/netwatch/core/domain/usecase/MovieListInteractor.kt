@@ -13,15 +13,15 @@ class MovieListInteractor @Inject constructor(
         return movieRepository.getMovieList(category)
     }
 
-//    override fun getAllFavoriteMovie(): Flowable<List<Movie>> {
-//        return movieRepository.getAllFavoriteMovie()
-//    }
-//
-//    override fun insertFavoriteMovie(movie: Movie) {
-//        movieRepository.insertFavoriteMovie(movie)
-//    }
-//
-//    override fun removeFavoriteMovie(movie: Movie) {
-//        movieRepository.remoteFavoriteMovie(movie)
-//    }
+    override fun getAllFavoriteMovie(): Flowable<List<Movie>> {
+        return movieRepository.getAllFavoriteMovie()
+    }
+
+    override fun insertFavoriteMovie(movie: Movie) {
+        movieRepository.insertFavoriteMovie(movie)
+    }
+
+    override fun removeFavoriteMovie(movie: Movie) {
+        movieRepository.removeFavoriteMovie(movie)
+    }
 }

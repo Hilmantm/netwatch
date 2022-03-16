@@ -21,9 +21,8 @@ object LocalDataConfig {
     fun provideLocalDataSource(
         @ApplicationContext ctx: Context
     ): LocalDataSource {
-        //val database = NetwatchDatabase.getInstance(ctx)
-//        return LocalDataSourceImpl(database.movieDao())
-        return LocalDataSourceImpl()
+        val database = NetwatchDatabase.getInstance(ctx)
+        return LocalDataSourceImpl(database.movieDao())
     }
 
 }

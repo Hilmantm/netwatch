@@ -21,8 +21,8 @@ class HomeFragmentViewModel @Inject constructor(
     val topRatedMovies = LiveDataReactiveStreams.fromPublisher(movieUseCase.getMovieList(TOP_RATED))
     val upcomingMovie = LiveDataReactiveStreams.fromPublisher(movieUseCase.getMovieList(UPCOMING))
 
-//    fun getAllFavoriteMovie() = LiveDataReactiveStreams.fromPublisher(movieUseCase.getAllFavoriteMovie())
-//    fun insertFavoriteMovie(movie: Movie) = movieUseCase.insertFavoriteMovie(movie)
-//    fun removeFavoriteMovie(movie: Movie) = movieUseCase.removeFavoriteMovie(movie)
+    fun getAllFavoriteMovie() = LiveDataReactiveStreams.fromPublisher(movieUseCase.getAllFavoriteMovie())
+    fun insertFavoriteMovie(movie: Movie) = movieUseCase.insertFavoriteMovie(movie)
+    fun removeFavoriteMovie(movie: Movie) = movieUseCase.removeFavoriteMovie(movie)
 
 }

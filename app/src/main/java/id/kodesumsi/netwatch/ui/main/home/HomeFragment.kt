@@ -95,7 +95,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                             }
 
                             bottomSheetBinding.btnOverviewFav.setOnClickListener {
-                                // viewModel.insertFavoriteMovie(item)
+                                viewModel.insertFavoriteMovie(item)
                                 Toast.makeText(requireContext(), "Fav", Toast.LENGTH_SHORT).show()
                             }
 

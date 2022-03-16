@@ -38,38 +38,38 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupFavoriteListLayout()
-//        viewModel.getAllFavoriteMovie().observe(viewLifecycleOwner) { movies ->
-//            val view: ComponentMovieShowListBinding = listOfFavorite[MOVIES] as ComponentMovieShowListBinding
-//
-//            movieFavoriteAdapter = BaseAdapter(movies, ItemMovieShowBinding::inflate) { item, favMoviesBinding ->
-//                if(movies.isNotEmpty()) {
-//                    Glide.with(this).load(MainActivity.imageResource(item.posterPath.toString())).into(favMoviesBinding.itemThumb)
-//                    favMoviesBinding.root.setOnClickListener {
-//                        val overviewBottomSheet = BaseBottomSheet(ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
-//                            bottomSheetBinding.overviewTitle.text = item.title.toString()
-//                            Glide.with(this).load(MainActivity.imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
-//                            bottomSheetBinding.overviewDesc.text = item.overview.toString()
-//
-//                            bottomSheetBinding.btnOverviewDetail.setOnClickListener {
-//                                Toast.makeText(requireContext(), "Detail", Toast.LENGTH_SHORT).show()
-//                            }
-//
-//                            bottomSheetBinding.btnOverviewFav.setOnClickListener {
-//                                viewModel.insertFavoriteMovie(item)
-//                            }
-//
-//                            bottomSheetBinding.btnOverviewClose.setOnClickListener {
-//                                context.dismiss()
-//                            }
-//                        }
-//                        overviewBottomSheet.show(childFragmentManager, "Movie Overview Bottom Sheet")
-//                    }
-//                }
-//            }
-//            view.rvMovieShow.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//            view.rvMovieShow.adapter = movieFavoriteAdapter
-//            showRvContent(view.pbMovieShow, view.rvMovieShow)
-//        }
+        viewModel.getAllFavoriteMovie().observe(viewLifecycleOwner) { movies ->
+            val view: ComponentMovieShowListBinding = listOfFavorite[MOVIES] as ComponentMovieShowListBinding
+
+            movieFavoriteAdapter = BaseAdapter(movies, ItemMovieShowBinding::inflate) { item, favMoviesBinding ->
+                if(movies.isNotEmpty()) {
+                    Glide.with(this).load(MainActivity.imageResource(item.posterPath.toString())).into(favMoviesBinding.itemThumb)
+                    favMoviesBinding.root.setOnClickListener {
+                        val overviewBottomSheet = BaseBottomSheet(ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
+                            bottomSheetBinding.overviewTitle.text = item.title.toString()
+                            Glide.with(this).load(MainActivity.imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
+                            bottomSheetBinding.overviewDesc.text = item.overview.toString()
+
+                            bottomSheetBinding.btnOverviewDetail.setOnClickListener {
+                                Toast.makeText(requireContext(), "Detail", Toast.LENGTH_SHORT).show()
+                            }
+
+                            bottomSheetBinding.btnOverviewFav.setOnClickListener {
+                                viewModel.insertFavoriteMovie(item)
+                            }
+
+                            bottomSheetBinding.btnOverviewClose.setOnClickListener {
+                                context.dismiss()
+                            }
+                        }
+                        overviewBottomSheet.show(childFragmentManager, "Movie Overview Bottom Sheet")
+                    }
+                }
+            }
+            view.rvMovieShow.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            view.rvMovieShow.adapter = movieFavoriteAdapter
+            showRvContent(view.pbMovieShow, view.rvMovieShow)
+        }
     }
 
     private fun setupFavoriteListLayout() {
