@@ -11,6 +11,8 @@ import id.kodesumsi.netwatch.base.BaseActivity
 import id.kodesumsi.netwatch.core.data.source.Resource
 import id.kodesumsi.netwatch.databinding.ActivityDetailBinding
 import id.kodesumsi.netwatch.ui.main.MainActivity
+import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getRating
+import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getYear
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.imageResource
 
 @AndroidEntryPoint
@@ -33,15 +35,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
 
         viewModel.getDetailMovie(movieId).observe(this) { movie ->
             if (movie != null) {
-                Log.d("DETAIL ACTIVITY", "data = ${movie.data}")
                 when (movie) {
                     is Resource.Success -> {
-                        Log.d("DETAIL ACTIVITY", "title = ${movie.data?.title}, release date = ${movie.data?.releaseDate}, year = ${movie.data?.releaseDate!!.split("-")[0]} , desc = ${movie.data?.overview}")
                         Glide.with(this).load(imageResource(movie.data?.posterPath.toString())).into(binding.detailThumb)
-                        binding.detailMovieTitle.text = movie.data.title.toString()
-                        binding.overviewYear.text = movie.data.releaseDate.split("-")[0]
-                        binding.overviewDesc.text = movie.data.overview.toString()
-                        binding.overviewVote.text = movie.data.voteAverage.toString()
+                        binding.detailMovieTitle.text = movie.data?.title.toString()
+                        binding.overviewYear.text = getYear(movie.data?.releaseDate.toString())
+                        binding.overviewDesc.text = movie.data?.overview.toString()
+                        binding.overviewVote.text = movie.data?.voteAverage.toString()
+                        binding.overviewRating.text = getRating(movie.data?.adult!!)
                     }
                     is Resource.Error -> {
                         Log.e("DETAIL ACTIVITY", "resource error: ${movie.message.toString()}", )
