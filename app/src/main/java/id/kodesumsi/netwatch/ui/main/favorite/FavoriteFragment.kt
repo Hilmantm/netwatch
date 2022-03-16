@@ -47,14 +47,14 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
             movieFavoriteAdapter = BaseAdapter(movies, ItemMovieShowBinding::inflate) { item, favMoviesBinding ->
                 if(movies.isNotEmpty()) {
-                    Glide.with(this).load(MainActivity.imageResource(item.posterPath.toString())).into(favMoviesBinding.itemThumb)
+                    Glide.with(requireContext()).load(MainActivity.imageResource(item.posterPath.toString())).into(favMoviesBinding.itemThumb)
                     favMoviesBinding.root.setOnClickListener {
                         val overviewBottomSheet = BaseBottomSheet(ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
                             bottomSheetBinding.overviewTitle.text = item.title.toString()
                             bottomSheetBinding.overviewYear.text = getYear(item.releaseDate.toString())
                             bottomSheetBinding.overviewRating.text = getRating(item.adult ?: false)
                             bottomSheetBinding.overviewVote.text = item.voteAverage.toString()
-                            Glide.with(this).load(MainActivity.imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
+                            Glide.with(requireContext()).load(MainActivity.imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
                             bottomSheetBinding.overviewDesc.text = item.overview.toString()
 
                             bottomSheetBinding.btnOverviewDetail.setOnClickListener {

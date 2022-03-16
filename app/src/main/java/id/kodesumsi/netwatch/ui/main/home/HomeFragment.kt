@@ -86,14 +86,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             is Resource.Loading -> showLoading(view.pbMovieShow, view.rvMovieShow)
             is Resource.Success -> {
                 listOfMoviesAdapter[category] = BaseAdapter(movies.data!!, ItemMovieShowBinding::inflate) { item, itemRvBinding ->
-                    Glide.with(this).load(imageResource(item.posterPath.toString())).into(itemRvBinding.itemThumb)
+                    Glide.with(requireContext()).load(imageResource(item.posterPath.toString())).into(itemRvBinding.itemThumb)
                     itemRvBinding.root.setOnClickListener {
                         val overviewBottomSheet = BaseBottomSheet(ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
                             bottomSheetBinding.overviewTitle.text = item.title.toString()
                             bottomSheetBinding.overviewYear.text = getYear(item.releaseDate.toString())
                             bottomSheetBinding.overviewRating.text = getRating(item.adult?:false)
                             bottomSheetBinding.overviewVote.text = item.voteAverage.toString()
-                            Glide.with(this).load(imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
+                            Glide.with(requireContext()).load(imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
                             bottomSheetBinding.overviewDesc.text = item.overview.toString()
 
                             bottomSheetBinding.btnOverviewDetail.setOnClickListener {
