@@ -15,4 +15,10 @@ interface NetworkService {
         @Query("api_key") apiKey: String
     ): Flowable<BaseResponse<List<MovieResponse>>>
 
+    @GET("search/movie")
+    fun searchMovieList(
+        @Query("query") query: String,
+        @Query("api_key") apiKey: String
+    ): Flowable<BaseResponse<List<MovieResponse>>>
+
 }

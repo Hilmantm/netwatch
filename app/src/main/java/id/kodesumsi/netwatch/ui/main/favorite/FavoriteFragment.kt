@@ -85,8 +85,6 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         mavieFavorite.root.layoutParams = layoutParams
         listOfFavorite[MOVIES] = mavieFavorite
         binding.favoriteMovieShowList.addView(mavieFavorite.root)
-
-        // tv show favorite
     }
 
 }

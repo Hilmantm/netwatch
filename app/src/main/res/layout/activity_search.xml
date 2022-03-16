@@ -42,6 +42,7 @@
         app:layout_constraintRight_toRightOf="parent"/>
 
     <LinearLayout
+        android:id="@+id/search_movie_show_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -53,19 +54,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <include
-            android:id="@+id/testing1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/section_margin"
-            layout="@layout/component_movie_show_list" />
-
-        <include
-            android:id="@+id/testing2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/section_margin"
-            layout="@layout/component_movie_show_list" />
 
     </LinearLayout>
 

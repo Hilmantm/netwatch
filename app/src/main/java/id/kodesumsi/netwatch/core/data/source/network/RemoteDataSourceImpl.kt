@@ -33,4 +33,23 @@ class RemoteDataSourceImpl @Inject constructor(
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
+    override fun searchMovieList(query: String): Flowable<ApiResponse<List<MovieResponse>>> {
+        val resultData = PublishSubject.create<ApiResponse<List<MovieResponse>>>()
+
+        val client = networkService.searchMovieList(query = query, apiKey = apiKey)
+
+        client.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                val movies = response.results
+                resultData.onNext(if (movies!!.isNotEmpty()) ApiResponse.Success(movies) else ApiResponse.Empty)
+            }, { error ->
+                resultData.onNext(ApiResponse.Error(error.message.toString()))
+                Log.e("RemoteDataSource", error.toString())
+            })
+
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
 }
