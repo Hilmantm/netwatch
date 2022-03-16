@@ -24,6 +24,8 @@ import id.kodesumsi.netwatch.databinding.ComponentBottomSheetOverviewBinding
 import id.kodesumsi.netwatch.databinding.ComponentMovieShowListBinding
 import id.kodesumsi.netwatch.databinding.ItemMovieShowBinding
 import id.kodesumsi.netwatch.ui.main.MainActivity
+import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getRating
+import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getYear
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.imageResource
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.showLoading
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.showRvContent
@@ -53,6 +55,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                                     itemRvBinding.root.setOnClickListener {
                                         val overviewBottomSheet = BaseBottomSheet(ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
                                             bottomSheetBinding.overviewTitle.text = item.title.toString()
+                                            bottomSheetBinding.overviewYear.text = getYear(item.releaseDate.toString())
+                                            bottomSheetBinding.overviewRating.text = getRating(item.adult ?: false)
+                                            bottomSheetBinding.overviewVote.text = item.voteAverage.toString()
                                             Glide.with(this).load(imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
                                             bottomSheetBinding.overviewDesc.text = item.overview.toString()
 

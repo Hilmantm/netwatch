@@ -36,5 +36,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         fun imageResource(path: String): String {
             return "https://image.tmdb.org/t/p/w500/$path"
         }
+
+        fun getYear(releaseDate: String): String = releaseDate.split("-")[0]
+
+        fun getRating(adult: Boolean): String = if (!adult) { "13+" } else { "18+" }
     }
 }

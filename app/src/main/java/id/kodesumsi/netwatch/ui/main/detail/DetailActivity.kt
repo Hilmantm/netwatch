@@ -38,9 +38,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
                     is Resource.Success -> {
                         Log.d("DETAIL ACTIVITY", "title = ${movie.data?.title}, release date = ${movie.data?.releaseDate}, year = ${movie.data?.releaseDate!!.split("-")[0]} , desc = ${movie.data?.overview}")
                         Glide.with(this).load(imageResource(movie.data?.posterPath.toString())).into(binding.detailThumb)
-                        binding.detailMovieTitle.text = movie.data?.title.toString()
-                        binding.overviewYear.text = movie.data?.releaseDate!!.split("-")[0]
-                        binding.overviewDesc.text = movie.data?.overview.toString()
+                        binding.detailMovieTitle.text = movie.data.title.toString()
+                        binding.overviewYear.text = movie.data.releaseDate.split("-")[0]
+                        binding.overviewDesc.text = movie.data.overview.toString()
+                        binding.overviewVote.text = movie.data.voteAverage.toString()
                     }
                     is Resource.Error -> {
                         Log.e("DETAIL ACTIVITY", "resource error: ${movie.message.toString()}", )
