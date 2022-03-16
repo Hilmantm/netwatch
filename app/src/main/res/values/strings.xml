@@ -18,4 +18,5 @@
     <string name="information">Information</string>
     <string name="detail">Detail</string>
     <string name="story_line">Story Line</string>
+    <string name="remove_fav">Unfavorite</string>
 </resources>

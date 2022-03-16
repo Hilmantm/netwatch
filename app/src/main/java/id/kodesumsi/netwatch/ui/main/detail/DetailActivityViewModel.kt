@@ -18,20 +18,33 @@ class DetailActivityViewModel @Inject constructor(
 ) : ViewModel() {
 
     val isFav: MutableLiveData<Movie> = MutableLiveData()
+    val favBtnActive: MutableLiveData<Boolean> = MutableLiveData()
+
+//    fun isFav(): LiveData<Movie> = _isFav
+//    fun favBtnActive(): LiveData<Boolean> = _favBtnActive
+
     fun getDetailMovie(id: Int) = LiveDataReactiveStreams.fromPublisher(movieUseCase.getMovieDetail(id))
+    fun insertFavoriteMovie(movie: Movie) = movieUseCase.insertFavoriteMovie(movie)
+    fun removeFavoriteMovie(movie: Movie) = movieUseCase.removeFavoriteMovie(movie)
 
     fun isFavorite(id: Int) {
         movieUseCase.isFavorite(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ movie ->
-                isFav.postValue(movie)
-            }, {
-                if (it is NoSuchElementException) {
+            .doOnEvent { movie, error ->
+                if(movie == null && error == null) {
                     isFav.postValue(Movie())
+                    favBtnActive.postValue(true)
                 } else {
-                    Log.d("DetailActivityViewModel", "error : ${it.message.toString()}")
+                    favBtnActive.postValue(false)
                 }
+            }
+            .subscribe({ movie ->
+                Log.d("DetailActivityViewModel", "movie: $movie")
+                isFav.postValue(movie)
+                favBtnActive.postValue(false)
+            }, {
+                Log.d("DetailActivityViewModel", "error : ${it.message.toString()}")
             })
     }
 
