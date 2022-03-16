@@ -84,6 +84,35 @@ class MovieRepositoryImpl @Inject constructor(
         return movies.toFlowable(BackpressureStrategy.BUFFER)
     }
 
+    override fun getMovieDetail(id: Int): Flowable<Resource<Movie>> {
+        val movies = PublishSubject.create<Resource<Movie>>()
+
+        movies.onNext(Resource.Loading(null))
+        remoteDataSource.getMovieDetail(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe { response ->
+                when (response) {
+                    is ApiResponse.Success -> {
+                        movies.onNext(
+                            Resource.Success(
+                                data = DataMapper.movieReponseToDomainMovie(response.data)
+                            )
+                        )
+                    }
+                    is ApiResponse.Empty -> {
+                        movies.onNext(Resource.Success(data = Movie()))
+                    }
+                    is ApiResponse.Error -> {
+                        movies.onNext(Resource.Error(response.errorMessage))
+                    }
+                }
+            }
+
+        return movies.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
     override fun getAllFavoriteMovie(): Flowable<List<Movie>> {
         val result = PublishSubject.create<List<Movie>>()
 

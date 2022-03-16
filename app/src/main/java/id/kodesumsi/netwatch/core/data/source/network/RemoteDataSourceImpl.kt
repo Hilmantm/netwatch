@@ -52,4 +52,22 @@ class RemoteDataSourceImpl @Inject constructor(
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
+    override fun getMovieDetail(id: Int): Flowable<ApiResponse<MovieResponse>> {
+        val resultData = PublishSubject.create<ApiResponse<MovieResponse>>()
+
+        val client = networkService.getMovieDetail(id = id, apiKey = apiKey)
+
+        client.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                resultData.onNext(if (response != null) ApiResponse.Success(response) else ApiResponse.Empty)
+            }, { error ->
+                resultData.onNext(ApiResponse.Error(error.message.toString()))
+                Log.e("RemoteDataSource", error.toString())
+            })
+
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
 }

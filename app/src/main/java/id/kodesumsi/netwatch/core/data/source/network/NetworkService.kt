@@ -3,6 +3,7 @@ package id.kodesumsi.netwatch.core.data.source.network
 import id.kodesumsi.netwatch.core.data.source.network.response.BaseResponse
 import id.kodesumsi.netwatch.core.data.source.network.response.MovieResponse
 import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -20,5 +21,11 @@ interface NetworkService {
         @Query("query") query: String,
         @Query("api_key") apiKey: String
     ): Flowable<BaseResponse<List<MovieResponse>>>
+
+    @GET("movie/{id}")
+    fun getMovieDetail(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String
+    ): Flowable<MovieResponse>
 
 }

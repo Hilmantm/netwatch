@@ -46,7 +46,4 @@ data class MovieResponse(
 	@field:SerializedName("vote_count")
 	val voteCount: Int? = null,
 
-	@field:SerializedName("credits")
-	val credits: CreditsResponse? = null,
-
 )

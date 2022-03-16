@@ -17,6 +17,10 @@ class MovieListInteractor @Inject constructor(
         return movieRepository.searchMovieList(query)
     }
 
+    override fun getMovieDetail(id: Int): Flowable<Resource<Movie>> {
+        return movieRepository.getMovieDetail(id)
+    }
+
     override fun getAllFavoriteMovie(): Flowable<List<Movie>> {
         return movieRepository.getAllFavoriteMovie()
     }

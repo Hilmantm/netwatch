@@ -19,6 +19,5 @@ data class Movie(
 	val id: Int? = null,
 	val adult: Boolean? = null,
 	val voteCount: Int? = null,
-	val credits: Credits? = null,
 
 ) : Parcelable

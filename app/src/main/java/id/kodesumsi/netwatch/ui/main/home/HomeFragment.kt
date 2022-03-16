@@ -30,6 +30,7 @@ import id.kodesumsi.netwatch.databinding.ItemMovieShowBinding
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.imageResource
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.showLoading
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.showRvContent
+import id.kodesumsi.netwatch.ui.main.detail.DetailActivity
 import id.kodesumsi.netwatch.ui.search.SearchActivity
 
 @AndroidEntryPoint
@@ -91,7 +92,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                             bottomSheetBinding.overviewDesc.text = item.overview.toString()
 
                             bottomSheetBinding.btnOverviewDetail.setOnClickListener {
-                                Toast.makeText(requireContext(), "Detail", Toast.LENGTH_SHORT).show()
+                                val toDetailActivity = Intent(requireContext(), DetailActivity::class.java)
+                                toDetailActivity.putExtra(DetailActivity.MOVIE_ID, item.id)
+                                requireContext().startActivity(toDetailActivity)
                             }
 
                             bottomSheetBinding.btnOverviewFav.setOnClickListener {
