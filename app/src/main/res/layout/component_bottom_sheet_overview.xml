@@ -117,6 +117,7 @@
         android:backgroundTint="#B00A0A"
         android:textSize="11sp"
         android:textColor="@color/white"
+        android:visibility="gone"
         app:layout_constraintRight_toRightOf="@id/btn_overview_close"
         app:layout_constraintTop_toBottomOf="@id/overview_desc"
         app:layout_constraintLeft_toRightOf="@id/btn_overview_detail"/>

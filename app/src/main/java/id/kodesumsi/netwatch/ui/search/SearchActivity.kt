@@ -1,5 +1,6 @@
 package id.kodesumsi.netwatch.ui.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getYear
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.imageResource
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.showLoading
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.showRvContent
+import id.kodesumsi.netwatch.ui.main.detail.DetailActivity
 
 @AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
@@ -62,7 +64,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                                             bottomSheetBinding.overviewDesc.text = item.overview.toString()
 
                                             bottomSheetBinding.btnOverviewDetail.setOnClickListener {
-                                                Toast.makeText(this@SearchActivity, "Detail", Toast.LENGTH_SHORT).show()
+                                                val toDetailActivity = Intent(this@SearchActivity, DetailActivity::class.java)
+                                                toDetailActivity.putExtra(DetailActivity.MOVIE_ID, item.id)
+                                                startActivity(toDetailActivity)
                                             }
 
                                             bottomSheetBinding.btnOverviewClose.setOnClickListener {

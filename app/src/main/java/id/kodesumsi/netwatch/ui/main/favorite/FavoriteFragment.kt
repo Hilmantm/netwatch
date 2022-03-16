@@ -1,5 +1,6 @@
 package id.kodesumsi.netwatch.ui.main.favorite
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ import id.kodesumsi.netwatch.ui.main.MainActivity
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getRating
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getYear
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.showRvContent
+import id.kodesumsi.netwatch.ui.main.detail.DetailActivity
 
 @AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
@@ -56,11 +58,9 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
                             bottomSheetBinding.overviewDesc.text = item.overview.toString()
 
                             bottomSheetBinding.btnOverviewDetail.setOnClickListener {
-                                Toast.makeText(requireContext(), "Detail", Toast.LENGTH_SHORT).show()
-                            }
-
-                            bottomSheetBinding.btnOverviewFav.setOnClickListener {
-                                viewModel.insertFavoriteMovie(item)
+                                val toDetailActivity = Intent(requireContext(), DetailActivity::class.java)
+                                toDetailActivity.putExtra(DetailActivity.MOVIE_ID, item.id)
+                                requireContext().startActivity(toDetailActivity)
                             }
 
                             bottomSheetBinding.btnOverviewClose.setOnClickListener {
