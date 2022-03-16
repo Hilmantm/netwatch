@@ -16,4 +16,6 @@
     <string name="search">Search</string>
     <string name="edt_search_hint">Search for a show, movie, etc</string>
     <string name="information">Information</string>
+    <string name="detail">Detail</string>
+    <string name="story_line">Story Line</string>
 </resources>
