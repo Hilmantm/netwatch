@@ -10,7 +10,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
-import id.kodesumsi.netwatch.BuildConfig
+import id.kodesumsi.core.BuildConfig
 import id.kodesumsi.netwatch.core.data.source.network.*
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
