@@ -5,7 +5,6 @@ import id.kodesumsi.netwatch.core.domain.model.Movie
 import id.kodesumsi.netwatch.core.domain.repository.MovieRepository
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Maybe
-import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class MovieListInteractor @Inject constructor(

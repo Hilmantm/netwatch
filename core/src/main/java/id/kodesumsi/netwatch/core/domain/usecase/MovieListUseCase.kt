@@ -4,7 +4,6 @@ import id.kodesumsi.netwatch.core.data.source.Resource
 import id.kodesumsi.netwatch.core.domain.model.Movie
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Maybe
-import io.reactivex.rxjava3.core.Single
 
 interface MovieListUseCase {
     fun getMovieList(category: String): Flowable<Resource<List<Movie>>>

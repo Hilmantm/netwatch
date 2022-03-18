@@ -1,10 +1,8 @@
 package id.kodesumsi.netwatch.ui.main.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,7 +10,6 @@ import id.kodesumsi.netwatch.R
 import id.kodesumsi.netwatch.base.BaseActivity
 import id.kodesumsi.netwatch.core.data.source.Resource
 import id.kodesumsi.netwatch.databinding.ActivityDetailBinding
-import id.kodesumsi.netwatch.ui.main.MainActivity
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getRating
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getYear
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.imageResource

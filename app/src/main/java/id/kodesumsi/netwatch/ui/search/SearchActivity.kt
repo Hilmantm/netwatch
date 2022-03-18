@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import id.kodesumsi.core.databinding.ComponentBottomSheetOverviewBinding
+import id.kodesumsi.core.databinding.ComponentMovieShowListBinding
 import id.kodesumsi.netwatch.R
 import id.kodesumsi.netwatch.base.BaseActivity
 import id.kodesumsi.netwatch.base.BaseAdapter
@@ -21,10 +21,7 @@ import id.kodesumsi.netwatch.core.data.source.DataSourceConstant
 import id.kodesumsi.netwatch.core.data.source.Resource
 import id.kodesumsi.netwatch.core.domain.model.Movie
 import id.kodesumsi.netwatch.databinding.ActivitySearchBinding
-import id.kodesumsi.netwatch.databinding.ComponentBottomSheetOverviewBinding
-import id.kodesumsi.netwatch.databinding.ComponentMovieShowListBinding
 import id.kodesumsi.netwatch.databinding.ItemMovieShowBinding
-import id.kodesumsi.netwatch.ui.main.MainActivity
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getRating
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getYear
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.imageResource
@@ -55,7 +52,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                                 searchMovieAdapter = BaseAdapter(movies.data!!, ItemMovieShowBinding::inflate) { item, itemRvBinding ->
                                     Glide.with(this).load(imageResource(item.posterPath.toString())).into(itemRvBinding.itemThumb)
                                     itemRvBinding.root.setOnClickListener {
-                                        val overviewBottomSheet = BaseBottomSheet(ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
+                                        val overviewBottomSheet = BaseBottomSheet(
+                                            ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
                                             bottomSheetBinding.overviewTitle.text = item.title.toString()
                                             bottomSheetBinding.overviewYear.text = getYear(item.releaseDate.toString())
                                             bottomSheetBinding.overviewRating.text = getRating(item.adult ?: false)

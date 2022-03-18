@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favorite_fragment"
-        android:name="id.kodesumsi.netwatch.ui.main.favorite.FavoriteFragment"
+        android:name="id.kodesumsi.netwatch.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
 

@@ -4,7 +4,6 @@ import id.kodesumsi.netwatch.core.data.source.local.entity.MovieEntity
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Maybe
-import io.reactivex.rxjava3.core.Single
 
 interface LocalDataSource {
 

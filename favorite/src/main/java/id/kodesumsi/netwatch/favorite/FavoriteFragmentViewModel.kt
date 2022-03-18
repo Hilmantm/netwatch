@@ -2,13 +2,10 @@ package id.kodesumsi.netwatch.favorite
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import id.kodesumsi.netwatch.core.domain.model.Movie
 import id.kodesumsi.netwatch.core.domain.usecase.MovieListUseCase
-import javax.inject.Inject
 
-@HiltViewModel
-class FavoriteFragmentViewModel @Inject constructor(
+class FavoriteFragmentViewModel(
     private val movieUseCase: MovieListUseCase
 ): ViewModel() {
 

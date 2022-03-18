@@ -10,7 +10,6 @@ import id.kodesumsi.netwatch.core.data.source.network.RemoteDataSource
 import id.kodesumsi.netwatch.core.domain.repository.MovieRepository
 import id.kodesumsi.netwatch.core.domain.usecase.MovieListInteractor
 import id.kodesumsi.netwatch.core.domain.usecase.MovieListUseCase
-import id.kodesumsi.netwatch.core.utils.AppExecutors
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
