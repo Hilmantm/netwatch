@@ -58,39 +58,38 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         viewModel = ViewModelProvider(requireActivity(), factory)[FavoriteFragmentViewModel::class.java]
 
         setupFavoriteListLayout()
+        val view: ComponentMovieShowListBinding = listOfFavorite[MOVIES] as ComponentMovieShowListBinding
         viewModel.getAllFavoriteMovie().observe(viewLifecycleOwner) { movies ->
-            val view: ComponentMovieShowListBinding = listOfFavorite[MOVIES] as ComponentMovieShowListBinding
+            movieFavoriteAdapter.setData(movies)
+            showRvContent(view.pbMovieShow, view.rvMovieShow)
+        }
+    }
 
-            movieFavoriteAdapter = BaseAdapter(movies, ItemMovieShowBinding::inflate) { item, favMoviesBinding ->
-                if(movies.isNotEmpty()) {
-                    Glide.with(requireContext()).load(MainActivity.imageResource(item.posterPath.toString())).into(favMoviesBinding.itemThumb)
-                    favMoviesBinding.root.setOnClickListener {
-                        val overviewBottomSheet = BaseBottomSheet(
-                            ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
-                            bottomSheetBinding.overviewTitle.text = item.title.toString()
-                            bottomSheetBinding.overviewYear.text = getYear(item.releaseDate.toString())
-                            bottomSheetBinding.overviewRating.text = getRating(item.adult ?: false)
-                            bottomSheetBinding.overviewVote.text = item.voteAverage.toString()
-                            Glide.with(requireContext()).load(MainActivity.imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
-                            bottomSheetBinding.overviewDesc.text = item.overview.toString()
+    private fun getMovieListAdapter(): BaseAdapter<ItemMovieShowBinding, Movie> {
+        return BaseAdapter(ItemMovieShowBinding::inflate) { item, itemRvBinding ->
+            Glide.with(requireContext()).load(MainActivity.imageResource(item.posterPath.toString())).into(itemRvBinding.itemThumb)
+            itemRvBinding.root.setOnClickListener {
+                val overviewBottomSheet = BaseBottomSheet(
+                    ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
+                    bottomSheetBinding.overviewTitle.text = item.title.toString()
+                    bottomSheetBinding.overviewYear.text = getYear(item.releaseDate.toString())
+                    bottomSheetBinding.overviewRating.text = getRating(item.adult?:false)
+                    bottomSheetBinding.overviewVote.text = item.voteAverage.toString()
+                    Glide.with(requireContext()).load(MainActivity.imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
+                    bottomSheetBinding.overviewDesc.text = item.overview.toString()
 
-                            bottomSheetBinding.btnOverviewDetail.setOnClickListener {
-                                val toDetailActivity = Intent(requireContext(), DetailActivity::class.java)
-                                toDetailActivity.putExtra(DetailActivity.MOVIE_ID, item.id)
-                                requireContext().startActivity(toDetailActivity)
-                            }
+                    bottomSheetBinding.btnOverviewDetail.setOnClickListener {
+                        val toDetailActivity = Intent(requireContext(), DetailActivity::class.java)
+                        toDetailActivity.putExtra(DetailActivity.MOVIE_ID, item.id)
+                        requireContext().startActivity(toDetailActivity)
+                    }
 
-                            bottomSheetBinding.btnOverviewClose.setOnClickListener {
-                                context.dismiss()
-                            }
-                        }
-                        overviewBottomSheet.show(childFragmentManager, "Movie Overview Bottom Sheet")
+                    bottomSheetBinding.btnOverviewClose.setOnClickListener {
+                        context.dismiss()
                     }
                 }
+                overviewBottomSheet.show(childFragmentManager, "Movie Overview Bottom Sheet")
             }
-            view.rvMovieShow.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            view.rvMovieShow.adapter = movieFavoriteAdapter
-            showRvContent(view.pbMovieShow, view.rvMovieShow)
         }
     }
 
@@ -102,11 +101,14 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
             setMargins(0, 0, 0, 20)
         }
 
-        val mavieFavorite = ComponentMovieShowListBinding.inflate(LayoutInflater.from(context))
-        mavieFavorite.movieShowTitle.text = getString(R.string.movie_now_playing)
-        mavieFavorite.root.layoutParams = layoutParams
-        listOfFavorite[MOVIES] = mavieFavorite
-        binding.favoriteMovieShowList.addView(mavieFavorite.root)
+        val movieFavorite = ComponentMovieShowListBinding.inflate(LayoutInflater.from(context))
+        movieFavorite.movieShowTitle.text = getString(R.string.movie_now_playing)
+        movieFavorite.root.layoutParams = layoutParams
+        movieFavoriteAdapter = getMovieListAdapter()
+        movieFavorite.rvMovieShow.adapter = movieFavoriteAdapter
+        movieFavorite.rvMovieShow.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        listOfFavorite[MOVIES] = movieFavorite
+        binding.favoriteMovieShowList.addView(movieFavorite.root)
     }
 
 }

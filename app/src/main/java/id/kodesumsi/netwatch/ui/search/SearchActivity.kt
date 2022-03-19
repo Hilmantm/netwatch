@@ -43,39 +43,12 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         binding.componentInputSearch.edtSearch.setOnEditorActionListener { textView, i, keyEvent ->
             return@setOnEditorActionListener when(i) {
                 EditorInfo.IME_ACTION_SEARCH -> {
+                    val view: ComponentMovieShowListBinding = listOfSearch[DataSourceConstant.MOVIES] as ComponentMovieShowListBinding
                     viewModel.searchMovieList(textView.text.toString()).observe(this@SearchActivity) { movies ->
-                        val view: ComponentMovieShowListBinding = listOfSearch[DataSourceConstant.MOVIES] as ComponentMovieShowListBinding
-
                         when(movies) {
                             is Resource.Loading -> showLoading(view.pbMovieShow, view.rvMovieShow)
                             is Resource.Success -> {
-                                searchMovieAdapter = BaseAdapter(movies.data!!, ItemMovieShowBinding::inflate) { item, itemRvBinding ->
-                                    Glide.with(this).load(imageResource(item.posterPath.toString())).into(itemRvBinding.itemThumb)
-                                    itemRvBinding.root.setOnClickListener {
-                                        val overviewBottomSheet = BaseBottomSheet(
-                                            ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
-                                            bottomSheetBinding.overviewTitle.text = item.title.toString()
-                                            bottomSheetBinding.overviewYear.text = getYear(item.releaseDate.toString())
-                                            bottomSheetBinding.overviewRating.text = getRating(item.adult ?: false)
-                                            bottomSheetBinding.overviewVote.text = item.voteAverage.toString()
-                                            Glide.with(this).load(imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
-                                            bottomSheetBinding.overviewDesc.text = item.overview.toString()
-
-                                            bottomSheetBinding.btnOverviewDetail.setOnClickListener {
-                                                val toDetailActivity = Intent(this@SearchActivity, DetailActivity::class.java)
-                                                toDetailActivity.putExtra(DetailActivity.MOVIE_ID, item.id)
-                                                startActivity(toDetailActivity)
-                                            }
-
-                                            bottomSheetBinding.btnOverviewClose.setOnClickListener {
-                                                context.dismiss()
-                                            }
-                                        }
-                                        overviewBottomSheet.show(supportFragmentManager, "Movie Overview Bottom Sheet")
-                                    }
-                                }
-                                view.rvMovieShow.layoutManager = LinearLayoutManager(this@SearchActivity, LinearLayoutManager.HORIZONTAL, false)
-                                view.rvMovieShow.adapter = searchMovieAdapter
+                                searchMovieAdapter.setData(movies.data)
                                 showRvContent(view.pbMovieShow, view.rvMovieShow)
                             }
                         }
@@ -84,6 +57,34 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                     true
                 }
                 else -> false
+            }
+        }
+    }
+
+    private fun getMovieListAdapter(): BaseAdapter<ItemMovieShowBinding, Movie> {
+        return BaseAdapter(ItemMovieShowBinding::inflate) { item, itemRvBinding ->
+            Glide.with(this).load(imageResource(item.posterPath.toString())).into(itemRvBinding.itemThumb)
+            itemRvBinding.root.setOnClickListener {
+                val overviewBottomSheet = BaseBottomSheet(
+                    ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
+                    bottomSheetBinding.overviewTitle.text = item.title.toString()
+                    bottomSheetBinding.overviewYear.text = getYear(item.releaseDate.toString())
+                    bottomSheetBinding.overviewRating.text = getRating(item.adult?:false)
+                    bottomSheetBinding.overviewVote.text = item.voteAverage.toString()
+                    Glide.with(this).load(imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
+                    bottomSheetBinding.overviewDesc.text = item.overview.toString()
+
+                    bottomSheetBinding.btnOverviewDetail.setOnClickListener {
+                        val toDetailActivity = Intent(this, DetailActivity::class.java)
+                        toDetailActivity.putExtra(DetailActivity.MOVIE_ID, item.id)
+                        startActivity(toDetailActivity)
+                    }
+
+                    bottomSheetBinding.btnOverviewClose.setOnClickListener {
+                        context.dismiss()
+                    }
+                }
+                overviewBottomSheet.show(supportFragmentManager, "Movie Overview Bottom Sheet")
             }
         }
     }
@@ -99,6 +100,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         val searchMovieList = ComponentMovieShowListBinding.inflate(LayoutInflater.from(this))
         searchMovieList.movieShowTitle.text = getString(R.string.movie_search_result)
         searchMovieList.root.layoutParams = layoutParams
+        searchMovieAdapter = getMovieListAdapter()
+        searchMovieList.rvMovieShow.layoutManager = LinearLayoutManager(this@SearchActivity, LinearLayoutManager.HORIZONTAL, false)
+        searchMovieList.rvMovieShow.adapter = searchMovieAdapter
         listOfSearch[DataSourceConstant.MOVIES] = searchMovieList
         binding.searchMovieShowList.addView(searchMovieList.root)
     }

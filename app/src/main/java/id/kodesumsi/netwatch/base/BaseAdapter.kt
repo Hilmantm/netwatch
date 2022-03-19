@@ -6,10 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
 class BaseAdapter<VB: ViewBinding, T>(
-    private val items: List<T>,
     private val setUpViewBinding: (LayoutInflater, ViewGroup?, Boolean) -> VB,
     private val bindItemIntoLayout: (item: T, binding: VB) -> Unit
 ): RecyclerView.Adapter<BaseAdapter.ViewHolder<VB, T>>() {
+
+    private var items = ArrayList<T>()
+
+    fun setData(newItems: List<T>?) {
+        if (newItems == null) return
+        items.clear()
+        items.addAll(newItems)
+        notifyDataSetChanged()
+    }
 
     class ViewHolder<VB: ViewBinding, T>(private val binding: ViewBinding): RecyclerView.ViewHolder(binding.root) {
 
