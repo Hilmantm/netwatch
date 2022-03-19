@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.EntryPointAccessors
 import id.kodesumsi.core.databinding.ComponentBottomSheetOverviewBinding
 import id.kodesumsi.core.databinding.ComponentMovieShowListBinding
-import id.kodesumsi.netwatch.R
 import id.kodesumsi.netwatch.base.BaseAdapter
 import id.kodesumsi.netwatch.base.BaseBottomSheet
 import id.kodesumsi.netwatch.base.BaseFragment
@@ -102,7 +101,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         }
 
         val movieFavorite = ComponentMovieShowListBinding.inflate(LayoutInflater.from(context))
-        movieFavorite.movieShowTitle.text = getString(R.string.movie_now_playing)
+        movieFavorite.movieShowTitle.text = getString(R.string.favorite_movies)
         movieFavorite.root.layoutParams = layoutParams
         movieFavoriteAdapter = getMovieListAdapter()
         movieFavorite.rvMovieShow.adapter = movieFavoriteAdapter
