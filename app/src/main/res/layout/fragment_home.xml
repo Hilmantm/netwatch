@@ -24,6 +24,7 @@
         android:src="@drawable/ic_baseline_notifications_24"
         android:layout_marginEnd="@dimen/root_padding"
         android:layout_marginTop="@dimen/root_padding"
+        android:visibility="invisible"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/home_logo"
         app:tint="@color/white" />
@@ -42,7 +43,6 @@
         android:id="@+id/banner_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/section_margin"
         android:background="@drawable/bg_eight_radius"
         android:orientation="horizontal"
         app:layout_constraintHorizontal_bias="0.0"
@@ -55,8 +55,7 @@
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
         android:id="@+id/banner_view_indicator"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="0dp"
         app:dotsSpacing="6dp"
         app:dotsSize="10dp"
         app:dotsColor="@color/banner_view_dots_color"

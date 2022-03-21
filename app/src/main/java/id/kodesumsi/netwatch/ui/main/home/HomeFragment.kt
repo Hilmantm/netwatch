@@ -160,7 +160,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val upcomingAdapter = getMovieListAdapter()
         upcomingLayoutBinding.rvMovieShow.adapter = upcomingAdapter
         upcomingLayoutBinding.rvMovieShow.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        listOfMoviesAdapter[POPULAR] = upcomingAdapter
+        listOfMoviesAdapter[UPCOMING] = upcomingAdapter
         listOfMovies[UPCOMING] = upcomingLayoutBinding
         binding.movieShowList.addView(upcomingLayoutBinding.root)
     }

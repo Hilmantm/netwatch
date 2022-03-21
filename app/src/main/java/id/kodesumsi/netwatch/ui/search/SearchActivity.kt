@@ -40,6 +40,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
     override fun setupViewInstance(savedInstanceState: Bundle?) {
         setupSearchResultLayout()
+        binding.btnSearchBack.setOnClickListener {
+            onBackPressed()
+        }
         binding.componentInputSearch.edtSearch.setOnEditorActionListener { textView, i, keyEvent ->
             return@setOnEditorActionListener when(i) {
                 EditorInfo.IME_ACTION_SEARCH -> {
