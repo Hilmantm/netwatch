@@ -11,6 +11,7 @@
     <string name="movie_upcoming">Upcoming Movies</string>
     <string name="home">Home</string>
     <string name="favorite">Favorite</string>
+    <string name="favorite_module">favorite</string>
     <string name="profile">Profile</string>
     <string name="hello_blank_fragment">Hello</string>
     <string name="search">Search</string>

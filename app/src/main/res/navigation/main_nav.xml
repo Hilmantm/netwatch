@@ -11,6 +11,7 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
+        app:moduleName="@string/favorite_module"
         android:id="@+id/favorite_fragment"
         android:name="id.kodesumsi.netwatch.favorite.FavoriteFragment"
         android:label="fragment_favorite"
