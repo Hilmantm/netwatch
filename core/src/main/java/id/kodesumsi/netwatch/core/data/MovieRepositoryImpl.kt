@@ -117,16 +117,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override fun getAllFavoriteMovie(): Flowable<List<Movie>> {
-        val result = PublishSubject.create<List<Movie>>()
-
-        localDataSouce.getAllFavoriteMovies()
-            .observeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                result.onNext(DataMapper.mapMovieEntityToDomainMovie(it))
-            }
-
-        return result.toFlowable(BackpressureStrategy.BUFFER)
+        return localDataSouce.getAllFavoriteMovies().map { DataMapper.mapMovieEntityToDomainMovie(it) }
     }
 
     override fun insertFavoriteMovie(movie: Movie) {
