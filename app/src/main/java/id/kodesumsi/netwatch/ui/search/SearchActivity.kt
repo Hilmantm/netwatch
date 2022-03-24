@@ -81,6 +81,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                         val toDetailActivity = Intent(this, DetailActivity::class.java)
                         toDetailActivity.putExtra(DetailActivity.MOVIE_ID, item.id)
                         startActivity(toDetailActivity)
+                        context.dismiss()
                     }
 
                     bottomSheetBinding.btnOverviewClose.setOnClickListener {

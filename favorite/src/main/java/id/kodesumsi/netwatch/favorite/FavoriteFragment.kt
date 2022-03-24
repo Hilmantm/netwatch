@@ -81,6 +81,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
                         val toDetailActivity = Intent(requireContext(), DetailActivity::class.java)
                         toDetailActivity.putExtra(DetailActivity.MOVIE_ID, item.id)
                         requireContext().startActivity(toDetailActivity)
+                        context.dismiss()
                     }
 
                     bottomSheetBinding.btnOverviewClose.setOnClickListener {
