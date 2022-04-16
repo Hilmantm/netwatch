@@ -12,11 +12,16 @@ import dagger.hilt.components.SingletonComponent
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import id.kodesumsi.core.BuildConfig
 import id.kodesumsi.netwatch.core.data.source.network.*
+import id.kodesumsi.netwatch.core.utils.SSLCertificateConfigurator
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.IllegalArgumentException
+import java.lang.IllegalStateException
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import javax.net.ssl.X509TrustManager
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -65,9 +70,17 @@ object ApiConfig {
     @Provides
     @Singleton
     fun providesHttpClient(
-        chuckerInterceptor: ChuckerInterceptor
+        chuckerInterceptor: ChuckerInterceptor,
+        @ApplicationContext ctx: Context
     ): OkHttpClient {
+        val trustManagerFactory = SSLCertificateConfigurator.getTrustManager(context = ctx)
+        val trustManagers = trustManagerFactory.trustManagers
+        if (trustManagers.size != 1 || trustManagers[0] !is X509TrustManager) {
+            throw IllegalStateException("Unexpected default trust managers: ${Arrays.toString(trustManagers)}")
+        }
+        val trustManager = trustManagers[0] as X509TrustManager
         return OkHttpClient.Builder()
+            .sslSocketFactory(SSLCertificateConfigurator.getSSLConfigure(ctx).socketFactory, trustManager)
             .callTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(5, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
