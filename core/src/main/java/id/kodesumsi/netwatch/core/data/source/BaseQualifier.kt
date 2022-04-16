@@ -15,3 +15,7 @@ annotation class BASE_URL
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class API_KEY
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class DB_KEY

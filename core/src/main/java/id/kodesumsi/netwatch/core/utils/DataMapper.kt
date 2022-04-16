@@ -45,52 +45,38 @@ object DataMapper {
     fun mapMovieEntityToDomainMovie(data: List<MovieEntity>): List<Movie> {
         return data.map {
             Movie(
-                id = it.id,
+                id = it.id.toInt(),
                 overview = it.overview,
                 title = it.title,
                 posterPath = it.posterPath,
                 backdropPath = it.backdropPath,
                 releaseDate =  it.releaseDate,
-                voteAverage = it.voteAverage,
-            )
-        }
-    }
-
-    fun mapMovieDomainToMovieEntity(data: List<Movie>): List<MovieEntity> {
-        return data.map {
-            MovieEntity(
-                id = it.id!!,
-                overview = it.overview,
-                title = it.title,
-                posterPath = it.posterPath,
-                backdropPath = it.backdropPath,
-                releaseDate =  it.releaseDate,
-                voteAverage = it.voteAverage
+                voteAverage = it.voteAverage?.toDouble(),
             )
         }
     }
 
     fun movieEntityToDomainMovie(data: MovieEntity): Movie {
         return Movie(
-            id = data.id,
+            id = data.id.toInt(),
             overview = data.overview,
             title = data.title,
             posterPath = data.posterPath,
             backdropPath = data.backdropPath,
             releaseDate =  data.releaseDate,
-            voteAverage = data.voteAverage
+            voteAverage = data.voteAverage?.toDouble()
         )
     }
 
     fun movieDomainToMovieEntity(data: Movie): MovieEntity {
         return MovieEntity(
-            id = data.id!!,
+            id = data.id.toString(),
             overview = data.overview,
             title = data.title,
             posterPath = data.posterPath,
             backdropPath = data.backdropPath,
             releaseDate =  data.releaseDate,
-            voteAverage = data.voteAverage
+            voteAverage = data.voteAverage.toString()
         )
     }
 

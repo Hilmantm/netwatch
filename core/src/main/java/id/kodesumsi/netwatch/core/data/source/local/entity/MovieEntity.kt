@@ -11,7 +11,7 @@ data class MovieEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
-    val id: Int,
+    val id: String,
 
     @ColumnInfo(name = "overview")
     val overview: String? = null,
@@ -29,5 +29,5 @@ data class MovieEntity(
     val releaseDate: String? = null,
 
     @ColumnInfo(name = "voteAverage")
-    val voteAverage: Double? = null
+    val voteAverage: String? = null
 )

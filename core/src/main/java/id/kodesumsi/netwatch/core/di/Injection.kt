@@ -10,6 +10,8 @@ import id.kodesumsi.netwatch.core.data.source.network.RemoteDataSource
 import id.kodesumsi.netwatch.core.domain.repository.MovieRepository
 import id.kodesumsi.netwatch.core.domain.usecase.MovieListInteractor
 import id.kodesumsi.netwatch.core.domain.usecase.MovieListUseCase
+import java.security.SecureRandom
+import javax.crypto.SecretKey
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -19,7 +21,7 @@ object Injection {
     @Provides
     fun provideMovieRepository(
         remoteDataSource: RemoteDataSource,
-        localDataSource: LocalDataSource
+        localDataSource: LocalDataSource,
     ): MovieRepository {
         return MovieRepositoryImpl.getInstance(remoteDataSource, localDataSource)
     }
