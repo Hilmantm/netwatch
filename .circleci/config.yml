@@ -1,26 +1,25 @@
-version: 2.1
- 
-orbs:
-  android: circleci/android@0.2.1
-
+version: 2
 jobs:
   build:
-    executor: android/android
+    working_directory: ~/code
+    docker:
+      - image: cimg/android:2021.10.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment:
+      JVM_OPTS: -Xmx3200m
     steps:
       - checkout
       - restore_cache:
-          key: android-orb-v1-
-      - run:
-          name: Chmod permissions
-          command: sudo chmod +x ./gradlew
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies --stacktrace
       - save_cache:
-          key: 'android-orb-v1-{{ epoch }}'
           paths:
-            - ~/.android/build-cache
-            - ~/.android/cache
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run Build
           command: ./gradlew build
