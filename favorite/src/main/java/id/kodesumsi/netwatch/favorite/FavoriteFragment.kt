@@ -9,7 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.EntryPointAccessors
 import id.kodesumsi.core.databinding.ComponentBottomSheetOverviewBinding
 import id.kodesumsi.core.databinding.ComponentMovieShowListBinding
@@ -66,7 +66,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
     private fun getMovieListAdapter(): BaseAdapter<ItemMovieShowBinding, Movie> {
         return BaseAdapter(ItemMovieShowBinding::inflate) { item, itemRvBinding ->
-            Glide.with(requireContext()).load(MainActivity.imageResource(item.posterPath.toString())).into(itemRvBinding.itemThumb)
+            Picasso.get().load(MainActivity.imageResource(item.posterPath.toString())).into(itemRvBinding.itemThumb)
             itemRvBinding.root.setOnClickListener {
                 val overviewBottomSheet = BaseBottomSheet(
                     ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
@@ -74,7 +74,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
                     bottomSheetBinding.overviewYear.text = getYear(item.releaseDate.toString())
                     bottomSheetBinding.overviewRating.text = getRating(item.adult?:false)
                     bottomSheetBinding.overviewVote.text = item.voteAverage.toString()
-                    Glide.with(requireContext()).load(MainActivity.imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
+                    Picasso.get().load(MainActivity.imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
                     bottomSheetBinding.overviewDesc.text = item.overview.toString()
 
                     bottomSheetBinding.btnOverviewDetail.setOnClickListener {

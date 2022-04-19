@@ -9,7 +9,7 @@ import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import id.kodesumsi.core.databinding.ComponentBottomSheetOverviewBinding
 import id.kodesumsi.core.databinding.ComponentMovieShowListBinding
@@ -66,7 +66,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
     private fun getMovieListAdapter(): BaseAdapter<ItemMovieShowBinding, Movie> {
         return BaseAdapter(ItemMovieShowBinding::inflate) { item, itemRvBinding ->
-            Glide.with(this).load(imageResource(item.posterPath.toString())).into(itemRvBinding.itemThumb)
+            Picasso.get().load(imageResource(item.posterPath.toString())).into(itemRvBinding.itemThumb)
             itemRvBinding.root.setOnClickListener {
                 val overviewBottomSheet = BaseBottomSheet(
                     ComponentBottomSheetOverviewBinding::inflate) { bottomSheetBinding, _, context ->
@@ -74,7 +74,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                     bottomSheetBinding.overviewYear.text = getYear(item.releaseDate.toString())
                     bottomSheetBinding.overviewRating.text = getRating(item.adult?:false)
                     bottomSheetBinding.overviewVote.text = item.voteAverage.toString()
-                    Glide.with(this).load(imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
+                    Picasso.get().load(imageResource(item.posterPath.toString())).into(bottomSheetBinding.overviewThumb)
                     bottomSheetBinding.overviewDesc.text = item.overview.toString()
 
                     bottomSheetBinding.btnOverviewDetail.setOnClickListener {
