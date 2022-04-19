@@ -3,10 +3,10 @@ jobs:
     build:
         working_directory: ~/code
         docker:
-        - image: cimg/android:2021.10.2
-            auth:
-                username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+            - image: cimg/android:2021.10.2
+                auth:
+                    username: mydockerhub-user
+                    password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
         JVM_OPTS: -Xmx3200m
     steps:
