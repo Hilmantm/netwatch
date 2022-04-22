@@ -30,8 +30,10 @@ dependencies {
     // Hilt Dependency Injection
     implementation "com.google.dagger:hilt-android:2.33-beta"
     kapt "com.google.dagger:hilt-android-compiler:2.31-alpha"
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+
+    implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -41,6 +43,10 @@ dependencies {
 
     // OKHttp
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
+    // Leak canary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

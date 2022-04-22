@@ -38,8 +38,6 @@ import id.kodesumsi.netwatch.ui.search.SearchActivity
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeFragmentViewModel by viewModels()
-    private val listOfMovies: MutableMap<String, ViewBinding> = mutableMapOf()
-    private val listOfMoviesAdapter: MutableMap<String, BaseAdapter<ItemMovieShowBinding, Movie>> = mutableMapOf()
 
     override fun setupViewBinding(): (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding = FragmentHomeBinding::inflate
 
@@ -51,38 +49,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             activity?.startActivity(toSearchActivity)
         }
 
-        setUpMovieList()
+        val listOfMovies: HashMap<String, ViewBinding> = hashMapOf()
+        val listOfMoviesAdapter: HashMap<String, BaseAdapter<ItemMovieShowBinding, Movie>> = hashMapOf()
+        setUpMovieList(listOfMovies, listOfMoviesAdapter)
 
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner) { movies ->
-            val view: ComponentMovieShowListBinding = listOfMovies[NOW_PLAYING] as ComponentMovieShowListBinding
-            setMoviesRosource(movies = movies, view = view, category = NOW_PLAYING)
+            setMoviesRosource(movies = movies, view = listOfMovies[NOW_PLAYING] as ComponentMovieShowListBinding, adapter = listOfMoviesAdapter[NOW_PLAYING]!!)
         }
 
         viewModel.topRatedMovies.observe(viewLifecycleOwner) { movies ->
-            val view: ComponentMovieShowListBinding = listOfMovies[TOP_RATED] as ComponentMovieShowListBinding
-            setMoviesRosource(movies = movies, view = view, category = TOP_RATED)
+            setMoviesRosource(movies = movies, view = listOfMovies[TOP_RATED] as ComponentMovieShowListBinding, adapter = listOfMoviesAdapter[TOP_RATED]!!)
         }
 
         viewModel.popularMovies.observe(viewLifecycleOwner) { movies ->
-            val view: ComponentMovieShowListBinding = listOfMovies[POPULAR] as ComponentMovieShowListBinding
-            setMoviesRosource(movies = movies, view = view, category = POPULAR)
+            setMoviesRosource(movies = movies, view = listOfMovies[POPULAR] as ComponentMovieShowListBinding, adapter = listOfMoviesAdapter[POPULAR]!!)
         }
 
         viewModel.upcomingMovie.observe(viewLifecycleOwner) { movies ->
-            val view: ComponentMovieShowListBinding = listOfMovies[UPCOMING] as ComponentMovieShowListBinding
-            setMoviesRosource(movies = movies, view = view, category = UPCOMING)
+            setMoviesRosource(movies = movies, view = listOfMovies[UPCOMING] as ComponentMovieShowListBinding, adapter = listOfMoviesAdapter[UPCOMING]!!)
         }
     }
 
     private fun setMoviesRosource(
         movies: Resource<List<Movie>>,
         view: ComponentMovieShowListBinding,
-        category: String
+        adapter: BaseAdapter<ItemMovieShowBinding, Movie>
     ) {
         when(movies) {
             is Resource.Loading -> showLoading(view.pbMovieShow, view.rvMovieShow)
             is Resource.Success -> {
-                listOfMoviesAdapter[category]?.setData(movies.data)
+                adapter.setData(movies.data)
                 showRvContent(view.pbMovieShow, view.rvMovieShow)
             }
         }
@@ -117,7 +113,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun setUpMovieList() {
+    private fun setUpMovieList(listOfMovies: HashMap<String, ViewBinding>, listOfMoviesAdapter: HashMap<String, BaseAdapter<ItemMovieShowBinding, Movie>>) {
         val layoutParams = ConstraintLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
@@ -125,7 +121,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             setMargins(0, 0, 0, 20)
         }
 
-        val nowPlayingLayoutBinding = ComponentMovieShowListBinding.inflate(LayoutInflater.from(context))
+        val nowPlayingLayoutBinding = ComponentMovieShowListBinding.inflate(LayoutInflater.from(requireContext()))
         nowPlayingLayoutBinding.movieShowTitle.text = getString(R.string.movie_now_playing)
         nowPlayingLayoutBinding.root.layoutParams = layoutParams
         val nowPlayingAdapter = getMovieListAdapter()
@@ -135,7 +131,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         listOfMovies[NOW_PLAYING] = nowPlayingLayoutBinding
         binding.movieShowList.addView(nowPlayingLayoutBinding.root)
 
-        val topRatedLayoutBinding = ComponentMovieShowListBinding.inflate(LayoutInflater.from(context))
+        val topRatedLayoutBinding = ComponentMovieShowListBinding.inflate(LayoutInflater.from(requireContext()))
         topRatedLayoutBinding.movieShowTitle.text = getString(R.string.movie_top_rated)
         topRatedLayoutBinding.root.layoutParams = layoutParams
         val topRatedAdapter = getMovieListAdapter()
@@ -145,7 +141,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         listOfMovies[TOP_RATED] = topRatedLayoutBinding
         binding.movieShowList.addView(topRatedLayoutBinding.root)
 
-        val popularLayoutBinding = ComponentMovieShowListBinding.inflate(LayoutInflater.from(context))
+        val popularLayoutBinding = ComponentMovieShowListBinding.inflate(LayoutInflater.from(requireContext()))
         popularLayoutBinding.movieShowTitle.text = getString(R.string.movie_popular)
         popularLayoutBinding.root.layoutParams = layoutParams
         val popularAdapter = getMovieListAdapter()
@@ -155,7 +151,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         listOfMovies[POPULAR] = popularLayoutBinding
         binding.movieShowList.addView(popularLayoutBinding.root)
 
-        val upcomingLayoutBinding = ComponentMovieShowListBinding.inflate(LayoutInflater.from(context))
+        val upcomingLayoutBinding = ComponentMovieShowListBinding.inflate(LayoutInflater.from(requireContext()))
         upcomingLayoutBinding.movieShowTitle.text = getString(R.string.movie_upcoming)
         upcomingLayoutBinding.root.layoutParams = layoutParams
         val upcomingAdapter = getMovieListAdapter()
