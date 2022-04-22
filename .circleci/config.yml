@@ -20,6 +20,9 @@ jobs:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
       - run:
+          name: Copy local properties
+          command: cp local.properties.ci local.properties
+      - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
