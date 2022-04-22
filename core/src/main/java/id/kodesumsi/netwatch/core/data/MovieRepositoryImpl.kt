@@ -8,15 +8,12 @@ import id.kodesumsi.netwatch.core.data.source.network.RemoteDataSource
 import id.kodesumsi.netwatch.core.domain.model.Movie
 import id.kodesumsi.netwatch.core.domain.repository.MovieRepository
 import id.kodesumsi.netwatch.core.utils.DataMapper
-import id.kodesumsi.netwatch.core.utils.EntityEncryption
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
-import java.security.SecureRandom
-import javax.crypto.SecretKey
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
