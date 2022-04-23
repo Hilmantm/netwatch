@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.EntryPointAccessors
-import id.kodesumsi.core.databinding.ComponentBottomSheetOverviewBinding
-import id.kodesumsi.core.databinding.ComponentMovieShowListBinding
 import id.kodesumsi.netwatch.base.BaseAdapter
 import id.kodesumsi.netwatch.base.BaseBottomSheet
 import id.kodesumsi.netwatch.base.BaseFragment
@@ -20,6 +18,8 @@ import id.kodesumsi.netwatch.core.data.source.DataSourceConstant.Companion.MOVIE
 import id.kodesumsi.netwatch.core.di.FavoriteModuleDepencencies
 import id.kodesumsi.netwatch.core.domain.model.Movie
 import id.kodesumsi.netwatch.core.domain.usecase.MovieListUseCase
+import id.kodesumsi.netwatch.databinding.ComponentBottomSheetOverviewBinding
+import id.kodesumsi.netwatch.databinding.ComponentMovieShowListBinding
 import id.kodesumsi.netwatch.databinding.ItemMovieShowBinding
 import id.kodesumsi.netwatch.favorite.databinding.FragmentFavoriteBinding
 import id.kodesumsi.netwatch.ui.main.MainActivity

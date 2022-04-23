@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import id.kodesumsi.core.databinding.ComponentBottomSheetOverviewBinding
-import id.kodesumsi.core.databinding.ComponentMovieShowListBinding
 import id.kodesumsi.netwatch.R
 import id.kodesumsi.netwatch.base.BaseAdapter
 import id.kodesumsi.netwatch.base.BaseBottomSheet
@@ -24,6 +22,8 @@ import id.kodesumsi.netwatch.core.data.source.DataSourceConstant.Companion.TOP_R
 import id.kodesumsi.netwatch.core.data.source.DataSourceConstant.Companion.UPCOMING
 import id.kodesumsi.netwatch.core.data.source.Resource
 import id.kodesumsi.netwatch.core.domain.model.Movie
+import id.kodesumsi.netwatch.databinding.ComponentBottomSheetOverviewBinding
+import id.kodesumsi.netwatch.databinding.ComponentMovieShowListBinding
 import id.kodesumsi.netwatch.databinding.FragmentHomeBinding
 import id.kodesumsi.netwatch.databinding.ItemMovieShowBinding
 import id.kodesumsi.netwatch.ui.main.MainActivity.Companion.getRating
