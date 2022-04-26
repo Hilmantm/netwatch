@@ -27,7 +27,6 @@ class DataMapperTest : TestCase() {
         val movieEntity = DataMapper.movieDomainToMovieEntity(movieDomain)
 
         assertNotNull(movieEntity)
-        assertTrue(movieEntity is MovieEntity)
 
         assertEquals(movieDomain.id.toString(), movieEntity.id)
         assertEquals(movieDomain.overview, movieEntity.overview)
@@ -53,7 +52,6 @@ class DataMapperTest : TestCase() {
         val movieDomain = DataMapper.movieEntityToDomainMovie(movieEntity)
 
         assertNotNull(movieDomain)
-        assertTrue(movieDomain is Movie)
 
         assertEquals(movieEntity.id.toInt(), movieDomain.id)
         assertEquals(movieEntity.overview, movieDomain.overview)
@@ -155,7 +153,6 @@ class DataMapperTest : TestCase() {
         val movieDomain = DataMapper.movieReponseToDomainMovie(movieResponse)
 
         assertNotNull(movieDomain)
-        assertTrue(movieDomain is Movie)
 
         assertEquals(movieResponse.id, movieDomain.id)
         assertEquals(movieResponse.overview, movieDomain.overview)

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import id.kodesumsi.netwatch.R
 import id.kodesumsi.netwatch.base.BaseActivity
@@ -43,7 +43,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             if (movie != null) {
                 when (movie) {
                     is Resource.Success -> {
-                        Glide.with(this).load(imageResource(movie.data?.posterPath.toString())).into(binding.detailThumb)
+                        Picasso.get().load(imageResource(movie.data?.posterPath.toString())).into(binding.detailThumb)
                         binding.detailMovieTitle.text = movie.data?.title.toString()
                         binding.overviewYear.text = getYear(movie.data?.releaseDate.toString())
                         binding.overviewDesc.text = movie.data?.overview.toString()

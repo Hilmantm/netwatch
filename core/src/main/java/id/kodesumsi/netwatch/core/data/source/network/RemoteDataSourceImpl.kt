@@ -24,6 +24,7 @@ class RemoteDataSourceImpl @Inject constructor(
             .take(1)
             .subscribe({ response ->
                 val movies = response.results
+                Log.d("RemoteDataSourceImpl", "getMovieList: ${movies.toString()}")
                 resultData.onNext(if (movies!!.isNotEmpty()) ApiResponse.Success(movies) else ApiResponse.Empty)
             }, { error ->
                 resultData.onNext(ApiResponse.Error(error.message.toString()))
