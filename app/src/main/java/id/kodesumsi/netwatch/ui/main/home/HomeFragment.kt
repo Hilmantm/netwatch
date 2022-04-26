@@ -3,6 +3,7 @@ package id.kodesumsi.netwatch.ui.main.home
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setUpMovieList(listOfMovies, listOfMoviesAdapter)
 
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner) { movies ->
+            Log.d("HomeFragment", "onViewCreated: nowPlayingVM: ${movies.data.toString()}")
             setMoviesRosource(movies = movies, view = listOfMovies[NOW_PLAYING] as ComponentMovieShowListBinding, adapter = listOfMoviesAdapter[NOW_PLAYING]!!)
         }
 
