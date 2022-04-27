@@ -55,7 +55,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setUpMovieList(listOfMovies, listOfMoviesAdapter)
 
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner) { movies ->
-            Log.d("HomeFragment", "onViewCreated: nowPlayingVM: ${movies.data.toString()}")
             setMoviesRosource(movies = movies, view = listOfMovies[NOW_PLAYING] as ComponentMovieShowListBinding, adapter = listOfMoviesAdapter[NOW_PLAYING]!!)
         }
 

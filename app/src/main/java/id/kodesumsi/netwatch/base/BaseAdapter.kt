@@ -1,5 +1,6 @@
 package id.kodesumsi.netwatch.base
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,7 @@ class BaseAdapter<VB: ViewBinding, T>(
 
     private var items = ArrayList<T>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(newItems: List<T>?) {
         if (newItems == null) return
         items.clear()

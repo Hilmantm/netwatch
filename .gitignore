@@ -1,5 +1,6 @@
 *.iml
 .gradle
+.circleci
 /local.properties
 /.idea/caches
 /.idea/libraries

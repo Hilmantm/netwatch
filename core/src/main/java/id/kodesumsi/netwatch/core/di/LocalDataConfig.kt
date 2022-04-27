@@ -1,6 +1,7 @@
 package id.kodesumsi.netwatch.core.di
 
 import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,9 +12,9 @@ import id.kodesumsi.netwatch.core.data.source.local.LocalDataSource
 import id.kodesumsi.netwatch.core.data.source.local.LocalDataSourceImpl
 import id.kodesumsi.netwatch.core.data.source.local.room.NetwatchDatabase
 import id.kodesumsi.netwatch.core.data.source.network.DB_KEY
-import java.security.SecureRandom
-import javax.crypto.KeyGenerator
-import javax.crypto.SecretKey
+import id.kodesumsi.netwatch.core.utils.Constant
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -29,11 +30,25 @@ object LocalDataConfig {
 
     @Provides
     @Singleton
-    fun provideLocalDataSource(
+    fun provideDatabase(
         @ApplicationContext ctx: Context,
         @DB_KEY dbKey: String
+    ): NetwatchDatabase {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes(dbKey.toCharArray())
+        val factory = SupportFactory(passphrase)
+
+        return Room.databaseBuilder(
+            ctx,
+            NetwatchDatabase::class.java,
+            Constant.DATABASE_NAME
+        ).fallbackToDestructiveMigration().openHelperFactory(factory).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(
+        database: NetwatchDatabase
     ): LocalDataSource {
-        val database = NetwatchDatabase.getInstance(ctx, dbKey)
         return LocalDataSourceImpl(database.movieDao())
     }
 

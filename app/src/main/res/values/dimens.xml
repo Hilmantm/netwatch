@@ -2,5 +2,4 @@
 <resources>
     <dimen name="root_padding">20dp</dimen>
     <dimen name="section_margin">20dp</dimen>
-    <dimen name="overview_padding">10dp</dimen>
 </resources>

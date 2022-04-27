@@ -12,13 +12,10 @@
     <string name="home">Home</string>
     <string name="favorite">Favorite</string>
     <string name="favorite_module">favorite</string>
-    <string name="profile">Profile</string>
-    <string name="hello_blank_fragment">Hello</string>
     <string name="search">Search</string>
     <string name="edt_search_hint">Search for a show, movie, etc</string>
     <string name="information">Information</string>
     <string name="detail">Detail</string>
     <string name="story_line">Story Line</string>
     <string name="remove_fav">Unfavorite</string>
-    <string name="title_favorite">favorite</string>
 </resources>
